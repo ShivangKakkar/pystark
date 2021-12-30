@@ -1,0 +1,21 @@
+# IDEs
+.idea/
+.vscode/
+.gitattributes
+
+# Python
+__pycache__/
+
+# Virtual Env
+venv/
+
+# PyPI
+dist/
+build/
+MANIFEST
+*.egg-info
+
+# Local
+/test.py
+/*.env
+.log

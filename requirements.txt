@@ -1,0 +1,7 @@
+pyrogram
+pyromod
+python-dotenv
+pytz
+redis
+SQLAlchemy
+TgCrypto
