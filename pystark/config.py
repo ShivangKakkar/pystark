@@ -22,7 +22,7 @@ from .logger import logger
 from importlib import import_module
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv('.env')
 
 API_ID = os.environ.get("API_ID", 0)
 API_HASH = os.environ.get("API_HASH", None)
