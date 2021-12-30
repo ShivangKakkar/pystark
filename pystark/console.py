@@ -53,5 +53,5 @@ def main():
 
 def boilerplate():
     os.system('pip install github-clone --quiet')
-    os.system('ghclone https://github.com/StarkBotsIndustries/PyStark/tree/main/boilerplate')
+    os.system('ghclone https://github.com/StarkBotsIndustries/PyStark/tree/master/boilerplate')
     os.system('pip uninstall github-clone --quiet -y')
