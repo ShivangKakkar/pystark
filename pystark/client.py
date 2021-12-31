@@ -106,7 +106,9 @@ class Stark(Client, Mechanism):
     @staticmethod
     def list_modules(directory):
         try:
-            return [file[:-3] for file in os.listdir(directory.replace('.', '/')) if file.endswith(".py")]
+            if "/." not in directory:
+                directory = directory.replace('.', '/')
+            return [file[:-3] for file in os.listdir(directory) if file.endswith(".py")]
         except FileNotFoundError:
             logger.warn("No Custom Plugins Found!")
             return
