@@ -25,11 +25,8 @@ from pyrogram.types import Message
 @patch(Message)
 class Message:
     @patchable
-    async def react(self, text: str, del_in: int = 0):
-        # For Future Purposes
-        # if self.from_user.is_self:
-        #     await self.edit(text)
-        reply = await self.reply(text, quote=True)
+    async def react(self, text: str, del_in: int = 0, **kwargs):
+        reply = await self.reply(text, quote=True, **kwargs)
         if del_in:
             await asyncio.sleep(del_in)
             await reply.delete()

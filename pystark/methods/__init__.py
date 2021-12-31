@@ -17,11 +17,4 @@
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
 
-from pyrogram.methods import Methods
-from .command import Command
-from .inline import Inline
-from .callback import Callback
-
-
-class Mechanism(Methods, Command, Inline, Callback):
-    pass
+from .message import Message

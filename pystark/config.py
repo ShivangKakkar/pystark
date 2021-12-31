@@ -39,6 +39,15 @@ REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD", None)
 
 
 def check_environment():
+    if not API_ID:
+        logger.critical("No API_ID found. Exiting...")
+        raise SystemExit
+    if not API_HASH:
+        logger.critical("No API_HASH found. Exiting...")
+        raise SystemExit
+    if not BOT_TOKEN:
+        logger.critical("No BOT_TOKEN found. Exiting...")
+        raise SystemExit
     try:
         int(API_ID)
     except ValueError:
@@ -49,25 +58,9 @@ def check_environment():
     except ValueError:
         logger.warn("OWNER_ID is not a valid integer. Exiting...")
         raise SystemExit
-
-    if not API_ID:
-        logger.critical("No API_ID found. Exiting...")
-        raise SystemExit
-    if not API_HASH:
-        logger.critical("No API_HASH found. Exiting...")
-        raise SystemExit
-    if not BOT_TOKEN:
-        logger.critical("No BOT_TOKEN found. Exiting...")
-        raise SystemExit
-
     if os.path.exists('data.py'):
         module = import_module('data')
     else:
         logger.warn("No 'data.py' found. Default values will be used.")
         module = import_module('pystark.data')
-
-    # Future Purposes
-    # SUDO_USERS = os.environ.get("SUDO_USERS", "")
-    # SUDO_USERS = [int(user_id) for user_id in SUDO_USERS.strip().split()]
-
     return module

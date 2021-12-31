@@ -25,7 +25,7 @@ from pyrogram.methods.decorators.on_message import OnMessage
 class Command(OnMessage):
     @staticmethod
     def command(
-        cmd: str,
+        cmd: str = None,
         # help_string: str = "",
         group: int = 0,
         owner_only: bool = False,

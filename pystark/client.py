@@ -21,7 +21,7 @@ import os
 import struct
 import logging
 from .logger import logger
-from .methods import Mechanism
+from .decorators import Mechanism
 from pyrogram import Client, idle
 from importlib import import_module
 from inspect import getmembers, isfunction

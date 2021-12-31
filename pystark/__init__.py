@@ -18,5 +18,6 @@
 
 
 from .client import Stark
-from .types import Message
+from .methods import Message
 from .logger import logger
+from pyrogram import filters

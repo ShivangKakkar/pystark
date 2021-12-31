@@ -17,8 +17,29 @@
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
 
+from pyrogram import filters as f
 from pyrogram.methods.decorators.on_callback_query import OnCallbackQuery
 
 
 class Callback(OnCallbackQuery):
-    pass
+    @staticmethod
+    def callback(
+        query_string: str = None,
+        in_list: list = None,
+        startswith: bool = False,
+        group: int = 0,
+        filters=None
+    ):
+        if in_list:
+            cmd_filter = f.create(lambda _, __, query: query.data in in_list)
+        else:
+            if not startswith:
+                cmd_filter = f.create(lambda _, __, query: query.data == query_string)
+            else:
+                cmd_filter = f.create(lambda _, __, query: query.data.startswith(query_string))
+        if not filters:
+            filters = cmd_filter
+        else:
+            filters = cmd_filter & filters
+        decorator = OnCallbackQuery.on_callback_query(filters, group)
+        return decorator

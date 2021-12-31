@@ -20,6 +20,7 @@
 from ..client import Stark
 from ..config import check_environment, OWNER_ID
 from pyrogram.errors import PeerIdInvalid
+from pyrogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
 module = check_environment()
 
@@ -27,7 +28,11 @@ module = check_environment()
 @Stark.cmd('start')
 async def start_func(bot: Stark, msg):
     try:
-        await msg.react(await replace(module.START, msg, bot))
+        text = await replace(module.START, msg, bot)
+        if send_buttons():
+            await msg.react(text, reply_markup=InlineKeyboardMarkup(main_buttons))
+        else:
+            await msg.react(text)
     except AttributeError:
         pass
 
@@ -35,7 +40,11 @@ async def start_func(bot: Stark, msg):
 @Stark.cmd('help')
 async def help_func(bot, msg):
     try:
-        await msg.react(await replace(module.HELP, msg, bot))
+        text = await replace(module.HELP, msg, bot)
+        if send_buttons():
+            await msg.react(text, reply_markup=InlineKeyboardMarkup(home_button))
+        else:
+            await msg.react(text)
     except AttributeError:
         pass
 
@@ -43,7 +52,11 @@ async def help_func(bot, msg):
 @Stark.cmd('about')
 async def about_func(bot, msg):
     try:
-        await msg.react(await replace(module.ABOUT, msg, bot))
+        text = await replace(module.ABOUT, msg, bot)
+        if send_buttons():
+            await msg.react(text, reply_markup=InlineKeyboardMarkup(home_button))
+        else:
+            await msg.react(text)
     except AttributeError:
         pass
 
@@ -57,6 +70,42 @@ async def id_func(_, msg):
             await msg.react("{}'s ID is `{}`".format(msg.reply_to_message.from_user.first_name, msg.reply_to_message.from_user.id))
         else:
             await msg.react("Chat ID is `{}` \n\nYour ID is `{}`".format(msg.chat.id, msg.from_user.id))
+
+
+@Stark.callback(in_list=['home', 'about', 'help'])
+async def basic_cb(bot: Stark, cb: CallbackQuery):
+    chat_id = cb.from_user.id
+    message_id = cb.message.message_id
+    if cb.data == 'home':
+        text = await replace(module.START, cb.message, bot)
+        buttons = main_buttons
+    elif cb.data == 'about':
+        text = await replace(module.ABOUT, cb.message, bot)
+        buttons = home_button
+    else:
+        text = await replace(module.HELP, cb.message, bot)
+        buttons = home_button
+    await bot.edit_message_text(
+        chat_id=chat_id,
+        message_id=message_id,
+        text=text,
+        reply_markup=InlineKeyboardMarkup(buttons),
+        disable_web_page_preview=True,
+    )
+
+
+home_button = [
+    [InlineKeyboardButton(text="🏠 Return Home 🏠", callback_data="home")]
+]
+
+main_buttons = [
+    [InlineKeyboardButton("✨ Bot Status and More Bots ✨", url="https://t.me/StarkBots/7")],
+    [
+        InlineKeyboardButton("How to Use ❔", callback_data="help"),
+        InlineKeyboardButton("🎪 About 🎪", callback_data="about")
+    ],
+    [InlineKeyboardButton("♥ More Amazing bots ♥", url="https://t.me/StarkBots")],
+]
 
 
 async def replace(m, msg, bot):
@@ -78,3 +127,14 @@ async def replace(m, msg, bot):
             owner = '@StarkBots'
         m = m.replace("{owner}", owner)
     return m
+
+
+def send_buttons():
+    if 'BUTTONS' in module.__dict__ and module.BUTTONS:
+        return True
+    return False
+
+
+# To-DO
+# Don't repeat replace() function everywhere
+# Better management for 'module' variable

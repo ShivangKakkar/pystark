@@ -33,25 +33,35 @@ def main():
     cwd = os.getcwd()
     parser.add_argument('-bp', '--boilerplate', help='create boilerplate in current folder', action='store_true')
     parser.add_argument('-bph', '--boilerplate-heroku', help='create boilerplate in current folder with added heroku support', action='store_true')
+    parser.add_argument('-s', '--special', help='create boilerplate for StarkBots', action='store_true')
     if len(sys.argv) == 1:
         parser.print_help()
         sys.exit(1)
     args = parser.parse_args()
-    if args.boilerplate_heroku or args.boilerplate:
-        if args.boilerplate_heroku:
+    if args.boilerplate_heroku or args.boilerplate or args.special:
+        if args.special:
+            print('Generating Boilerplate (for Stark Bots)...')
+            boilerplate(special=True)
+        elif args.boilerplate_heroku:
             print('Generating Boilerplate (with Heroku Support)...')
             boilerplate()
-            os.remove(cwd+'/boilerplate/.env')
         else:
             print('Generating Boilerplate...')
             boilerplate()
-            files = ['app.json', 'Procfile', 'runtime.txt', 'README.md', 'requirements.txt']
+            files = ['app.json', 'Procfile', 'README.md', 'requirements.txt']
             for file in files:
                 os.remove(cwd+'/boilerplate/'+file)
         print('Done. Boilerplate is ready!')
 
 
-def boilerplate():
+def boilerplate(special=False):
     os.system('pip install github-clone --quiet')
-    os.system('ghclone https://github.com/StarkBotsIndustries/PyStark/tree/master/boilerplate')
+    if special:
+        os.system('ghclone https://github.com/StarkBotsIndustries/PyStark/tree/master/boilerplate/special')
+    else:
+        os.system('ghclone https://github.com/StarkBotsIndustries/PyStark/tree/master/boilerplate/normal')
     os.system('pip uninstall github-clone --quiet -y')
+    if special:
+        os.rename('special', 'boilerplate')
+    else:
+        os.rename('normal', 'boilerplate')
