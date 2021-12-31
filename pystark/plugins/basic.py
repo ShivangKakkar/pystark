@@ -27,7 +27,6 @@ module = check_environment()
 @Stark.cmd('start')
 async def start_func(bot: Stark, msg):
     try:
-        Stark.log("Hello")
         await msg.react(await replace(module.START, msg, bot))
     except AttributeError:
         pass

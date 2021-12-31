@@ -30,7 +30,7 @@ packages = find_packages(exclude=["boilerplate*"])
 setup(
     name='PyStark',
     packages=packages,
-    version='0.1.2',
+    version='0.1.3',
     license='GPLv3+',
     description='An incomplete add-on extension to Pyrogram for personal use.',
     long_description=long_description,
@@ -45,7 +45,7 @@ setup(
     python_requires="~=3.6",
     dependency_links=['https://github.com/pyrogram/pyrogram/tarball/master'],
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Operating System :: OS Independent',

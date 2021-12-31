@@ -74,7 +74,8 @@ class Stark(Client, Mechanism):
         self.start()
         self.load_modules(plugins)
         if default_plugins:
-            self.load_modules('pystark.plugins')
+            from pystark import plugins
+            self.load_modules(plugins.__path__[0])
         logger.info("{} is now running...".format('@' + self.get_me().username))
         idle()
         self.stop()
@@ -85,6 +86,10 @@ class Stark(Client, Mechanism):
         if not modules:
             return
         for module in modules:
+            if module.startswith("__"):
+                return
+            if 'pystark' in plugins:
+                plugins = 'pystark.plugins'
             mod = import_module(plugins+'.'+module)
             funcs = [func for func, _ in getmembers(mod, isfunction)]
             for func in funcs:
