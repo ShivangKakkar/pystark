@@ -57,11 +57,7 @@ def main():
 def boilerplate(special=False):
     os.system('pip install github-clone --quiet')
     if special:
-        os.system('ghclone https://github.com/StarkBotsIndustries/PyStark/tree/master/boilerplate/special')
+        os.system('ghclone https://github.com/StarkBotsIndustries/PyStark/tree/master/boilerplate_starkbots')
     else:
-        os.system('ghclone https://github.com/StarkBotsIndustries/PyStark/tree/master/boilerplate/normal')
+        os.system('ghclone https://github.com/StarkBotsIndustries/PyStark/tree/master/boilerplate')
     os.system('pip uninstall github-clone --quiet -y')
-    if special:
-        os.rename('special', 'boilerplate')
-    else:
-        os.rename('normal', 'boilerplate')

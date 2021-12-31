@@ -25,7 +25,7 @@ with open("README.md", encoding="utf-8") as f:
 with open("requirements.txt", encoding="utf-8") as r:
     install_requires = [i.strip() for i in r]
 
-packages = find_packages(exclude=["boilerplate*"])
+packages = find_packages()
 
 setup(
     name='PyStark',
