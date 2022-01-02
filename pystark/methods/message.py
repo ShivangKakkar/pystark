@@ -26,7 +26,7 @@ from pyrogram.types import Message
 class Message:
     @patchable
     async def react(self, text: str, del_in: int = 0, **kwargs):
-        reply = await self.reply(text, quote=True, **kwargs)
+        reply = await self.reply(text, quote=True, disable_web_page_preview=True, **kwargs)
         if del_in:
             await asyncio.sleep(del_in)
             await reply.delete()

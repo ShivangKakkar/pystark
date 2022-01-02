@@ -2,14 +2,14 @@
 
 > A star ⭐ from you means a lot to me !
 
-#### Telegram bot to sample
+#### Telegram bot to 
 
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 ## Functions
 
-1. This can do this
-2. That can do that
+1. 
+2. 
 
 ## Deployment
 
@@ -34,7 +34,7 @@
 
 4. Enter the directory
    ```markdown
-   cd plugins
+   cd SampleBot
    ```
 5. Run the file
    ```markdown

@@ -29,6 +29,7 @@ class Command(OnMessage):
         # help_string: str = "",
         group: int = 0,
         owner_only: bool = False,
+        private: bool = False,
         extra_filters=None
     ):
         filters_ = f.command(cmd, prefixes=CMD_PREFIXES)
@@ -36,6 +37,8 @@ class Command(OnMessage):
             filters_ = filters_ & f.user(OWNER_ID)
         if extra_filters:
             filters_ = filters_ & extra_filters
+        if private:
+            filters_ = filters_ & f.private
         decorator = OnMessage.on_message(filters_, group)
         return decorator
 

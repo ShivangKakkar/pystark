@@ -25,7 +25,7 @@ from pyrogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardBu
 module = check_environment()
 
 
-@Stark.cmd('start')
+@Stark.cmd('start', private=True)
 async def start_func(bot: Stark, msg):
     try:
         text = await replace(module.START, msg, bot)
@@ -37,7 +37,7 @@ async def start_func(bot: Stark, msg):
         pass
 
 
-@Stark.cmd('help')
+@Stark.cmd('help', private=True)
 async def help_func(bot, msg):
     try:
         text = await replace(module.HELP, msg, bot)
@@ -49,7 +49,7 @@ async def help_func(bot, msg):
         pass
 
 
-@Stark.cmd('about')
+@Stark.cmd('about', private=True)
 async def about_func(bot, msg):
     try:
         text = await replace(module.ABOUT, msg, bot)

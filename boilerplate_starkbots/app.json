@@ -1,7 +1,7 @@
 {
   "name": "A Bot",
-  "description": "Telegram bot to do something",
-  "logo": "image logo link",
+  "description": "Telegram bot to ",
+  "logo": "https://telegra.ph/file/183c733fbf8d2dc4351a7.jpg",
   "keywords": [
     "telegram",
     "bot",
@@ -25,7 +25,7 @@
          "plan": "heroku-postgresql"
       }
    ],
-  "repository": "https://github.com/StarkBotsIndustries",
+  "repository": "https://github.com/StarkBotsIndustries/",
   "env": {
     "API_ID": {
       "description": "Get this value from my.telegram.org.",
