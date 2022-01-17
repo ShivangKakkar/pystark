@@ -4,17 +4,10 @@
 
 An incomplete add-on extension to [Pyrogram](https://pypi.org/project/Pyrogram), to create telegram bots a bit more easily.
 
-**Intended for personal use**
 
-I do **NOT** 'especially' recommend you to use it.
+## Documentation
 
-## Installation (using pip)
-
-**[Available on PyPI](https://pypi.org/project/PyStark/)**
-
-```bash
-pip3 install pystark
-```
+Read the Documentation : https://pystark.readthedocs.io/
 
 ## What's the main purpose?
 
@@ -44,64 +37,8 @@ Stark().activate()
 ```
 - Easier to use methods and decorators
 
-## Usage
 
-- ### Creating Boilerplate Code
-
-You can generate a boilerplate to set up the common files you need. You can also choose to have added heroku support which will create `app.json`, `Procfile`, etc.
-This can be done using the **command-line utility**.
-
-Run below command
-
-```bash
-pystark
-```
-
-
-`cd` into the directory where you want to create the **boilerplate** folder. Then run below command.
-
-```bash
-pystark --boilerplate
-```
-
-To create boilerplate with **Heroku Support**
-
-```bash
-pystark --boilerplate-heroku
-```
-
-Boilerplate folder will be created with a **plugins** directory and some other necessary files
-
-- ### Making Basic Changes to the folder
-
-1. **Filling variables** - Fill the mandatory values in `.env` file. (Step only if non-heroku boilerplate is created)
-2. **Changing Text for Messages** - Go to 'data.py' and change string values as it suits you.
-
-- ### Create your own plugins
-
-You can create plugins and add it in **plugins** folder, and it'll be automatically loaded while starting the bot. Of course, you need Python knowledge to create awesome plugins.
-
-```python
-# Import class 'Stark' in top of every plugin
-from pystark import Stark, Message
-
-
-# use 'Stark.cmd' decorator to create commands
-# @Stark.cmd('name', owner_only=False, extra_filters=None, group=0) - defaults
-
-@Stark.cmd('sample')  # or @Stark.command('sample')
-async def sample_function(bot: Stark, msg: Message):
-    # 'msg.react()' is 'msg.reply()' with del_in added argument
-    await msg.react('This will be the reply when /sample is sent to the bot.')
-```
-
-- ### Run the bot
-
-**Heroku** - Create a repository and tap on Deploy Heroku Button. Fill the values, click deploy and wait for 2 minutes and done.
-
-**Local Deploy** - Make sure you filled variables in `.env` as told above. Run the `bot.py` file using command `python3 bot.py` and there you go.
-
-## Credits and Library
+## Credits
 
 - [Dan](https://github.com/delivrance) for his [Pyrogram](https://github.com/pyrogram/pyrogram) Library on top of which **pystark** works.
 
@@ -110,7 +47,6 @@ async def sample_function(bot: Stark, msg: Message):
 Telegram Channel - **[StarkBots](https://t.me/StarkBots)**
 
 Telegram Chat - **[StarkBotsChat](https://t.me/StarkBotsChat)**
-
 
 ## Copyright and License
 

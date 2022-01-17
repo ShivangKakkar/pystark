@@ -30,7 +30,7 @@ packages = find_packages()
 setup(
     name='PyStark',
     packages=packages,
-    version='0.2.2',
+    version='0.2.4',
     license='GPLv3+',
     description='An incomplete add-on extension to Pyrogram for personal use.',
     long_description=long_description,
@@ -62,6 +62,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
     project_urls={
+        "Documentation": "https://pystark.readthedocs.io/",
         "Community": "https://t.me/StarkBots",
         "Support": "https://t.me/StarkBotsChat",
     },
