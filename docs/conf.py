@@ -1,27 +1,29 @@
 project = 'PyStark'
-copyright = '2022, StarkProgrammer'
+copyright = '2021-2022, StarkProgrammer'
 author = 'StarkProgrammer'
-release = '2022'
+release = '2021-2022'
 extensions = [
-    # "myst_parser",
     "sphinx_copybutton",
     "sphinx_rtd_theme",
     "sphinx_rtd_dark_mode",
-    "sphinx_toolbox.confval",
-    "sphinx_toolbox.github",
-    "sphinx_toolbox.sidebar_links"
+    # "sphinx_toolbox.confval",
+    # "sphinx_toolbox.github",
+    # "sphinx_toolbox.sidebar_links",
+    # "myst_parser"
 ]
-# latex_engine = "xelatex"
-templates_path = ['_templates']
+templates_path = ['templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_theme = 'sphinx_rtd_theme'
-# html_theme_options = {"logo_only": True}
-# html_logo = "pystark.png"
 html_favicon = 'favicon.ico'
-# html_static_path = ['_static']
 copybutton_prompt_text = "$ "
 default_dark_mode = False
-github_username = 'StarkBotsIndustries'
-github_repository = 'pystark'
 
-# .. confval:: text
+# latex_engine = "xelatex"
+# html_theme_options = {"logo_only": True}
+# html_logo = "pystark.png"
+# html_static_path = ['_static']
+# github_username = 'StarkBotsIndustries'
+# github_repository = 'pystark'
+
+# .. confval:: text,
+# sidebar, github
