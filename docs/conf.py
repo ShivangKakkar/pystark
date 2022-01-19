@@ -6,7 +6,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_rtd_theme",
     "sphinx_rtd_dark_mode",
-    # "sphinx_toolbox.confval",
+    "sphinx_toolbox.confval",
     # "sphinx_toolbox.github",
     # "sphinx_toolbox.sidebar_links",
     # "myst_parser"
@@ -14,6 +14,7 @@ extensions = [
 templates_path = ['templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_theme = 'sphinx_rtd_theme'
+# html_theme = "pydata_sphinx_theme"
 html_favicon = 'favicon.ico'
 copybutton_prompt_text = "$ "
 default_dark_mode = False

@@ -6,7 +6,7 @@ By following this guide, you will have a basic understanding of how to use them.
 
 .. note::
 
-    This feature is still in beta. There are a lot of things to do like adding global functions, default classes, alembic support for sqlalchemy, etc and this is just a pre-release.
+    This feature is still in beta. There are a lot of things to add like alembic support for sqlalchemy, etc and this is just a pre-release.
 
 .. contents:: Contents
     :backlinks: none
@@ -40,7 +40,7 @@ Below is a code example for a table named ``users`` with 3 columns named ``user_
     class Users(Base):
         __tablename__ = "users"
         __table_args__ = {'extend_existing': True}
-        user_id = Column(Integer, primary_key=True)  # sql pk
+        user_id = Column(Integer, primary_key=True)  # sql primary key (pk)
         name = Column(String)
         aim = Column(String)
 
@@ -53,43 +53,17 @@ Below is a code example for a table named ``users`` with 3 columns named ``user_
     # Create Table
     Users.__table__.create(checkfirst=True)
 
-- **Querying Tables** - You can query tables using ``Session`` object.
+- **Querying Tables** - You can query tables using ``Session`` object or the in-built pystark functions.
 
-.. code-block:: python
-
-    # import 'Session' object
-    from pystark.database.postgres import Session
-    # import Python class for respective table
-    # let's say it is in 'users_sql.py' inside 'database' folder.
-    from database.users_sql import Users
+    - :ref:`Using Session object <session-object>`
+    - :ref:`Using in-built functions <default-functions>`
 
 
-    # This function gives total 'rows', that is total user ids in 'users' table.
-    def num_users():
-        users = Session.query(Users).count()
-        # close session after all queries are made.
-        Session.close()
-        return users
+.. toctree::
+    :hidden:
+    :caption: database
 
-
-    # This function returns 'name' and 'aim' for users by using 'user_id'
-    def get_name_and_aim(user_id):
-        query = Session.query(Users).get(user_id)
-        name = query.name  # get name
-        aim = query.aim  # get aim
-        Session.close()
-        return (name, aim)
-
-
-    # This function sets name and aim for users by using 'user_id'
-    def set_name_and_aim(user_id, name, aim):
-        query = Session.query(Users).get(user_id)
-        query.name = name  # set name
-        query.aim = aim  # set aim
-        Session.commit()  # use this after setting anything.
-        # Now you don't need to 'Session.close()' as you used 'Session.commit()' already.
-
-    # Etc
+    postgres
 
 --------
 
