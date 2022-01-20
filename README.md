@@ -7,7 +7,7 @@ An incomplete add-on extension to [Pyrogram](https://pypi.org/project/Pyrogram),
 
 ## Documentation
 
-Read the Documentation : https://pystark.readthedocs.io/
+Read the Documentation : https://pystark.codes
 
 ## What's the main purpose?
 
