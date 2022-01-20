@@ -21,6 +21,8 @@ from pyrogram import filters as f
 from ..config import CMD_PREFIXES, OWNER_ID
 from pyrogram.methods.decorators.on_message import OnMessage
 
+command_data = {"commands": 0, "commands_list": []}
+
 
 class Command(OnMessage):
     @staticmethod
@@ -34,10 +36,14 @@ class Command(OnMessage):
         if not cmd and not extra_filters:
             filters_ = None
         elif cmd and extra_filters:
+            command_data["commands"] += 1
+            command_data["commands_list"].append(cmd)
             filters_ = f.command(cmd, prefixes=CMD_PREFIXES) & extra_filters
         elif extra_filters:
             filters_ = extra_filters
         else:
+            command_data["commands"] += 1
+            command_data["commands_list"].append(cmd)
             filters_ = f.command(cmd, prefixes=CMD_PREFIXES)
         if owner_only:
             filters_ = filters_ & f.user(OWNER_ID)

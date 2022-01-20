@@ -23,13 +23,14 @@ How the Documentation is Organized
 .. hlist::
     :columns: 1
 
-    - :doc:`Installation <introduction/install>` - Overview to get you started quickly.
-    - :doc:`Boilerplate <topics/boilerplate>` - Generate a boilerplate.
-    - :doc:`Mandatory Variables <topics/variables>` -  Setup the needed variables for bot.
-    - :doc:`Customization <topics/customization>` - Easily customize your bot.
-    - :doc:`Creating Plugins <topics/plugins>` - Code your own plugins
-    - :doc:`Run Bot <topics/run>` - Run your bot locally.
-    - :doc:`Using Databases <topics/database>` - Use various databases with PyStark.
+    - :doc:`Installation <introduction/install>` - Install pystark on your device.
+    - :doc:`Boilerplate <start/boilerplate>` - Generate a boilerplate.
+    - :doc:`Mandatory Variables <start/variables>` -  Setup the needed variables for bot.
+    - :doc:`Customization <start/customization>` - Easily customize your bot.
+    - :doc:`Creating Plugins <start/plugins>` - Code your own plugins
+    - :doc:`Run Bot <start/run>` - Run your bot locally.
+    - :doc:`Using Databases <start/database>` - Use various databases with PyStark.
+    - :doc:`Class Stark <topics/stark>` -  The main class Stark
 
 
 Easy mantra to use this documentation
@@ -59,12 +60,18 @@ Meta
     :hidden:
     :caption: Getting Started
 
-    topics/boilerplate
-    topics/variables
-    topics/plugins
-    topics/customization
-    topics/run
-    topics/database
+    start/boilerplate
+    start/variables
+    start/plugins
+    start/customization
+    start/run
+    start/database
+
+.. toctree::
+    :hidden:
+    :caption: Topics
+
+    topics/stark
 
 .. toctree::
     :hidden:

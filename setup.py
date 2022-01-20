@@ -30,7 +30,7 @@ packages = find_packages()
 setup(
     name='PyStark',
     packages=packages,
-    version='0.2.5',
+    version='0.2.6',
     license='GPLv3+',
     description='An incomplete add-on extension to Pyrogram for personal use.',
     long_description=long_description,

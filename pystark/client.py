@@ -21,8 +21,10 @@ import os
 import struct
 import logging
 from .logger import logger
+from typing import Union
 from .decorators import Mechanism
 from pyrogram import Client, idle
+from pyrogram.types import Message
 from importlib import import_module
 from inspect import getmembers, isfunction
 from .config import API_ID, API_HASH, BOT_TOKEN, check_environment
@@ -33,6 +35,9 @@ from pyrogram.errors import (
     AuthKeyUnregistered,
     UserDeactivated,
 )
+from .decorators.command import command_data
+
+data = {"plugins": 0, "plugins_list": []}
 
 
 class Stark(Client, Mechanism):
@@ -65,12 +70,56 @@ class Stark(Client, Mechanism):
         raise SystemExit
 
     @staticmethod
-    def log(message, level=logging.INFO):
+    def log(message, level: Union[str, int] = logging.INFO):
+        """Log messages to console.
+
+        .. list-table:: Possible values for Level
+           :widths: 50 50
+           :header-rows: 1
+
+           * - String
+             - Integer
+           * - **debug**
+             - 10
+           * - **info**
+             - 20
+           * - **warning**
+             - 30
+           * - **error**
+             - 40
+           * - **critical**
+             - 50
+
+        Parameters:
+            message: Item to print to console.
+            level: Logging level as string or int.
+        """
+        if isinstance(level, str):
+            level = level.lower()
+        if level in ["critical", 50]:
+            level = logging.CRITICAL
+        elif level in ["error", 40]:
+            level = logging.ERROR
+        elif level in ["warning", "warn", 30]:
+            level = logging.WARNING
+        elif level in ["info", 20]:
+            level = logging.INFO
+        elif level in ["debug", 10]:
+            level = logging.DEBUG
         logger.log(level, message)
 
-    def activate(self, plugins: str = None, default_plugins: bool = True):
-        if not plugins:
-            plugins = 'plugins'
+    def activate(self, plugins: str = 'plugins', default_plugins: bool = True):
+        """Activate/Run your bot.
+
+        Parameters:
+            plugins (`str`):
+                Path of the 'plugins' directory in relation to the root directory.
+                If name of your directory is 'files' and it is in the same folder as 'bot.py', pass plugin='files'.
+                Defaults to 'plugins', i.e, a folder named 'plugins' in same directory as 'bot.py'
+
+            default_plugins (`bool`):
+                Pass False to disable default plugins. Defaults to True.
+        """
         self.start()
         self.load_modules(plugins)
         if default_plugins:
@@ -98,6 +147,8 @@ class Stark(Client, Mechanism):
                         self.add_handler(handler, group)
                 except AttributeError:  # Other Functions shouldn't be included
                     pass
+            data["plugins"] += 1
+            data["plugins_list"].append(module)
             if module == "basic":
                 logger.info("Loaded - Default Plugins")
             else:
@@ -112,3 +163,56 @@ class Stark(Client, Mechanism):
         except FileNotFoundError:
             logger.warn("No Custom Plugins Found!")
             return
+
+    @staticmethod
+    def list_args(message: Union[Message, str], split: str = " "):
+        """List arguments passed in a message. Removes first word (the command itself)
+
+        Parameters:
+            message:
+                Pass a command message or message.text to get arguments passed in this message.
+
+            split (`str`):
+                How to split the arguments, Defaults to ' '.
+
+        **Example**: if text is "/start reply user", reply would be ["reply", "user"]
+        """
+        if isinstance(message, Message):
+            message = message.text
+        args = message.split(split)
+        args.pop(0)
+        return args
+
+    @staticmethod
+    def data(key: str = None):
+        """Returns a special dictionary with four keys.
+
+        .. list-table:: Possible Keys
+           :widths: 25 75
+           :header-rows: 1
+
+           * - Key
+             - Returns
+           * - **plugins**
+             - number of plugins in bot
+           * - **plugins_list**
+             - list of plugins in bot
+           * - **commands**
+             - number of commands in bot
+           * - **commands_list**
+             - list of commands in bot
+
+        Parameters:
+            key (`str`) :
+                Return only one of the four keys from ["plugins", "plugins_list", "commands", "commands_list"]
+
+        Example:
+            .. code-block:: python
+
+                {"plugins": 2, "plugins_list": ["basic", "sample"], "commands": 5, "command_list": ["start", "help", "about", "id", "sample"]}
+        """
+        data.update(command_data)
+        if not key:
+            return data
+        else:
+            return data[key]
