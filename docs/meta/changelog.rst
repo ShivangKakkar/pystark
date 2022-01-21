@@ -1,7 +1,13 @@
 ChangeLog
 =========
 
-Latest Version - ``v0.2.8``
+Latest Version - ``v0.2.9``
+
+------------------
+
+.. confval:: v0.2.9
+
+- Fix Bugs of v0.2.8
 
 ------------------
 
@@ -10,8 +16,6 @@ Latest Version - ``v0.2.8``
 - Renamed argument ``private`` to ``private_only`` in command decorator.
 - Added two new arguments ``group_only`` and ``channel_only`` in command decorator.
 - Added docs for command decorator. :doc:`See Here</decorators/command>`
-
-------------------
 
 .. confval:: v0.2.7
 
