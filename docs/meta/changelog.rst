@@ -1,7 +1,15 @@
 ChangeLog
 =========
 
-Latest Version - ``v0.2.7``
+Latest Version - ``v0.2.8``
+
+------------------
+
+.. confval:: v0.2.8
+
+- Renamed argument ``private`` to ``private_only`` in command decorator.
+- Added two new arguments ``group_only`` and ``channel_only`` in command decorator.
+- Added docs for command decorator. :doc:`See Here</decorators/command>`
 
 ------------------
 
@@ -12,8 +20,6 @@ Latest Version - ``v0.2.7``
 - ``Stark.data()`` now also returns a dictionary of command descriptions (key=command, value=description). See :meth:`pystark.client.Stark.data`
 - ``Stark.activate`` now takes a optional argument ``set_menu`` to disable (or enable) auto-update of bot menu. :ref:`Read More <customize-bot-menu>`
 - Added docs for Bot Menu. :doc:`Read Here </topics/bot_menu>`
-
-------------------
 
 .. confval:: v0.2.6
 

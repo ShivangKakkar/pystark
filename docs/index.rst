@@ -30,7 +30,8 @@ How the Documentation is Organized
     - :doc:`Creating Plugins <start/plugins>` - Code your own plugins
     - :doc:`Run Bot <start/run>` - Run your bot locally.
     - :doc:`Using Databases <start/database>` - Use various databases with PyStark.
-    - :doc:`Class Stark <topics/stark>` -  The main class Stark
+    - :doc:`Class Stark <topics/stark>` -  The main class Stark.
+    - :doc:`Command Decorator <decorators/command>` - The main decorator in pystark.
 
 
 Easy mantra to use this documentation
@@ -73,6 +74,12 @@ Meta
 
     topics/bot_menu
     topics/stark
+
+.. toctree::
+    :hidden:
+    :caption: Decorators
+
+    decorators/command
 
 .. toctree::
     :hidden:
