@@ -1,7 +1,17 @@
 ChangeLog
 =========
 
-Latest Version - ``v0.2.6``
+Latest Version - ``v0.2.7``
+
+------------------
+
+.. confval:: v0.2.7
+
+- Auto Update Bot Menu at runtime. :doc:`Read More </topics/bot_menu>`
+- Added description argument in ``command`` decorator(for bot menu).
+- ``Stark.data()`` now also returns a dictionary of command descriptions (key=command, value=description). See :meth:`pystark.client.Stark.data`
+- ``Stark.activate`` now takes a optional argument ``set_menu`` to disable (or enable) auto-update of bot menu. :ref:`Read More <customize-bot-menu>`
+- Added docs for Bot Menu. :doc:`Read Here </topics/bot_menu>`
 
 ------------------
 

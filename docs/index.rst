@@ -71,6 +71,7 @@ Meta
     :hidden:
     :caption: Topics
 
+    topics/bot_menu
     topics/stark
 
 .. toctree::

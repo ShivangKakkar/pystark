@@ -28,14 +28,17 @@ extensions = [
 # napoleon_use_param = True
 # napoleon_use_rtype = True
 
-add_module_names = False
 templates_path = ['templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 html_theme = 'sphinx_rtd_theme'
 # html_theme = "pydata_sphinx_theme"
-html_favicon = 'favicon.ico'
+html_favicon = 'images/favicon.ico'
 copybutton_prompt_text = "$ "
 default_dark_mode = False
+
+# autodoc_class_signature = "separated"
+autodoc_inherit_docstrings = False
+add_module_names = False
 
 # latex_engine = "xelatex"
 # html_theme_options = {"logo_only": True}
@@ -43,9 +46,6 @@ default_dark_mode = False
 # html_static_path = ['_static']
 # github_username = 'StarkBotsIndustries'
 # github_repository = 'pystark'
-
-# autodoc_class_signature = "separated"
-autodoc_inherit_docstrings = False
 
 # .. confval:: text,
 # sidebar, github

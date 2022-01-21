@@ -23,8 +23,9 @@ import logging
 from .logger import logger
 from typing import Union
 from .decorators import Mechanism
-from pyrogram import Client, idle
+from pyrogram import Client, idle, raw
 from pyrogram.types import Message
+from pyrogram.types import BotCommand
 from importlib import import_module
 from inspect import getmembers, isfunction
 from .config import API_ID, API_HASH, BOT_TOKEN, check_environment
@@ -108,7 +109,7 @@ class Stark(Client, Mechanism):
             level = logging.DEBUG
         logger.log(level, message)
 
-    def activate(self, plugins: str = 'plugins', default_plugins: bool = True):
+    def activate(self, plugins: str = 'plugins', default_plugins: bool = True, set_menu=True):
         """Activate/Run your bot.
 
         Parameters:
@@ -119,16 +120,30 @@ class Stark(Client, Mechanism):
 
             default_plugins (`bool`):
                 Pass False to disable default plugins. Defaults to True.
+
+            set_menu (`bool`):
+                Pass False to disable menu. Defaults to True.
         """
-        self.start()
-        self.load_modules(plugins)
-        if default_plugins:
-            from pystark import plugins
-            self.load_modules(plugins.__path__[0])
-        logger.info("{} is now running...".format('@' + self.get_me().username))
-        idle()
-        self.stop()
-        logger.info("Bot has stopped working")
+        try:
+            self.log("Starting the Bot")
+            self.start()
+            self.log("Loading Modules")
+            if default_plugins:
+                from pystark import plugins as defaults
+                self.load_modules(defaults.__path__[0])
+            self.load_modules(plugins)
+            if set_menu:
+                self.log("Updating Bot Menu")
+                self.update_bot_menu()
+            else:
+                self.log("Skipping Bot Menu Update")
+            logger.info("{} is now running...".format('@' + self.get_me().username))
+            idle()
+        finally:
+            if set_menu:
+                self.remove_bot_menu()
+            self.stop()
+            logger.info("Bot has stopped working. For issues, visit <https://t.me/StarkBotsChat>")
 
     def load_modules(self, plugins):
         modules = self.list_modules(plugins)
@@ -185,7 +200,7 @@ class Stark(Client, Mechanism):
 
     @staticmethod
     def data(key: str = None):
-        """Returns a special dictionary with four keys.
+        """Returns a special dictionary with five keys.
 
         .. list-table:: Possible Keys
            :widths: 25 75
@@ -201,18 +216,41 @@ class Stark(Client, Mechanism):
              - number of commands in bot
            * - **commands_list**
              - list of commands in bot
+           * - **command_descriptions**
+             - command_descriptions dictionary if passed in ``Stark.cmd`` decorator
 
         Parameters:
             key (`str`) :
-                Return only one of the four keys from ["plugins", "plugins_list", "commands", "commands_list"]
+                Return only one of the five keys from ["plugins", "plugins_list", "commands", "commands_list", "command_descriptions"]
 
         Example:
             .. code-block:: python
 
-                {"plugins": 2, "plugins_list": ["basic", "sample"], "commands": 5, "command_list": ["start", "help", "about", "id", "sample"]}
+                {"plugins": 2, "plugins_list": ["basic", "sample"], "commands": 5, "command_list": ["start", "help", "about", "id", "sample"]}, command_descriptions: {"start": "Start the bot"}
         """
         data.update(command_data)
         if not key:
             return data
         else:
             return data[key]
+
+    def update_bot_menu(self):
+        dictionary = Stark.data("command_descriptions")
+        commands = []
+        for key in dictionary:
+            commands.append(BotCommand(key, str(dictionary[key])).write())
+        self.send(
+            raw.functions.bots.SetBotCommands(
+                scope=raw.types.BotCommandScopeDefault(),
+                lang_code='en',
+                commands=commands
+            )
+        )
+
+    def remove_bot_menu(self):
+        self.send(
+            raw.functions.bots.ResetBotCommands(
+                scope=raw.types.BotCommandScopeDefault(),
+                lang_code='en',
+            )
+        )

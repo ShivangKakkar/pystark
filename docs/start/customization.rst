@@ -70,3 +70,11 @@ Let's say I renamed the ``plugins`` folder to ``files``. Then I should do this:
 .. code-block:: python
 
     Stark().activate(plugins="files")
+
+
+------------------
+
+Disable Bot Menu Updating
+-------------------------
+
+- :ref:`Please refer here <customize-bot-menu>`

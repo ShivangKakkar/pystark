@@ -25,7 +25,7 @@ from pyrogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardBu
 module = check_environment()
 
 
-@Stark.cmd('start', private=True)
+@Stark.cmd('start', description="Start the bot", private=True)
 async def start_func(bot: Stark, msg):
     try:
         text = await replace(module.START, msg, bot)
@@ -37,7 +37,7 @@ async def start_func(bot: Stark, msg):
         pass
 
 
-@Stark.cmd('help', private=True)
+@Stark.cmd('help', description="How to use the bot?", private=True)
 async def help_func(bot, msg):
     try:
         text = await replace(module.HELP, msg, bot)
@@ -49,7 +49,7 @@ async def help_func(bot, msg):
         pass
 
 
-@Stark.cmd('about', private=True)
+@Stark.cmd('about', description="About the bot", private=True)
 async def about_func(bot, msg):
     try:
         text = await replace(module.ABOUT, msg, bot)
@@ -61,7 +61,7 @@ async def about_func(bot, msg):
         pass
 
 
-@Stark.cmd('id')
+@Stark.cmd('id', description="Get your Telegram ID")
 async def id_func(_, msg):
     if msg.chat.type == 'private':
         await msg.react("Your ID is `{}`".format(msg.from_user.id))
