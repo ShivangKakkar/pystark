@@ -1,8 +1,11 @@
 pyrogram
-pyromod
-python-dotenv
+pyromod~=1.5
+python-dotenv~=0.19.2
 pytz
-redis
-SQLAlchemy
+
+# Databases
+redis~=4.1.1
+SQLAlchemy~=1.4.31
 TgCrypto
 TelegramDB==0.1.0
+tinydb~=4.6.1

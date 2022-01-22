@@ -32,6 +32,8 @@ How the Documentation is Organized
     - :doc:`Using Databases <topics/database>` - Use various databases with PyStark.
     - :doc:`Class Stark <topics/stark>` -  The main class Stark.
     - :doc:`Command Decorator <decorators/command>` - The main decorator in pystark.
+    - :doc:`Telegram as a Database <topics/telegramdb>` - Use telegram as a database.
+
 
 
 Easy mantra to use this documentation
@@ -73,6 +75,8 @@ Meta
 
     topics/database
     topics/telegramdb
+    topics/tinydb
+    topics/postgres
     topics/bot_menu
     topics/stark
 

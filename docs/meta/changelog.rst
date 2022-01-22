@@ -1,7 +1,13 @@
 ChangeLog
 =========
 
-Latest Version - ``v0.2.10``
+Latest Version - ``v0.2.11``
+
+------------------
+
+.. confval:: v0.2.11
+
+- Use TinyDB for your project. :doc:`Read More About It </topics/tinydb>`.
 
 ------------------
 
@@ -9,7 +15,6 @@ Latest Version - ``v0.2.10``
 
 - Use Telegram as a Database. :doc:`Read More About It </topics/telegramdb>`.
 
-------------------
 
 .. confval:: v0.2.9
 

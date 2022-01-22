@@ -9,6 +9,13 @@ By following this guide, you will have a basic understanding of how to use them.
     :depth: 1
     :local:
 
+------
+
+TinyDB
+-------
+
+TinyDB is a simple database which does not require a Database URL and is very simple. If you are a beginner, it is for you. :doc:`Read How to Use It </topics/tinydb>`.
+
 --------
 
 PostgreSQL (using sqlalchemy)
@@ -53,13 +60,6 @@ Below is a code example for a table named ``users`` with 3 columns named ``user_
 
     - :ref:`Using Session object <session-object>`
     - :ref:`Using in-built functions <default-functions>`
-
-
-.. toctree::
-    :hidden:
-    :caption: database
-
-    postgres
 
 --------
 
