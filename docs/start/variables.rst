@@ -49,4 +49,5 @@ Non-mandatory Variables
 - ``DATABASE_URL`` - for PostgreSQL database
 - ``REDIS_URL`` - for Redis database (public endpoint)
 - ``REDIS_PASSWORD`` - for Redis database
-
+- ``DB_SESSION`` - for using Telegram as a database.
+- ``DB_CHAT_ID``- for using Telegram as a database (ID of a new channel).

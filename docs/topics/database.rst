@@ -4,10 +4,6 @@ Using Databases
 You can use any database you wish with PyStark, but we have provided a simple default setup for some databases, such as PostgreSQL and Redis, to make them even easier to use.
 By following this guide, you will have a basic understanding of how to use them.
 
-.. note::
-
-    This feature is still in beta. There are a lot of things to add like alembic support for sqlalchemy, etc and this is just a pre-release.
-
 .. contents:: Contents
     :backlinks: none
     :depth: 1
@@ -64,6 +60,16 @@ Below is a code example for a table named ``users`` with 3 columns named ``user_
     :caption: database
 
     postgres
+
+--------
+
+Using Telegram as a Database
+----------------------------
+
+You can use Telegram as a Database, thanks to `this project <https://pypi.org/project/TelegramDB/>`_.
+
+**But How?** - :doc:`Read Documentation Here </topics/telegramdb>`
+
 
 --------
 

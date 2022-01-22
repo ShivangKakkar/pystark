@@ -3,10 +3,6 @@ Querying Postgres Tables
 
 In this guide, you will learn how to query using postgres tables while using PyStark
 
-.. note::
-
-    This feature is still in beta. There are a lot of things to add like default classes, alembic support, etc and this is just a pre-release.
-
 .. contents:: Contents
     :backlinks: none
     :depth: 1

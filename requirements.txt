@@ -5,3 +5,4 @@ pytz
 redis
 SQLAlchemy
 TgCrypto
+TelegramDB==0.1.0

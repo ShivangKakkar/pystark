@@ -29,7 +29,7 @@ How the Documentation is Organized
     - :doc:`Customization <start/customization>` - Easily customize your bot.
     - :doc:`Creating Plugins <start/plugins>` - Code your own plugins
     - :doc:`Run Bot <start/run>` - Run your bot locally.
-    - :doc:`Using Databases <start/database>` - Use various databases with PyStark.
+    - :doc:`Using Databases <topics/database>` - Use various databases with PyStark.
     - :doc:`Class Stark <topics/stark>` -  The main class Stark.
     - :doc:`Command Decorator <decorators/command>` - The main decorator in pystark.
 
@@ -66,12 +66,13 @@ Meta
     start/plugins
     start/customization
     start/run
-    start/database
 
 .. toctree::
     :hidden:
     :caption: Topics
 
+    topics/database
+    topics/telegramdb
     topics/bot_menu
     topics/stark
 

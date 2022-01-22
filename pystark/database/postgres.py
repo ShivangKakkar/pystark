@@ -28,7 +28,8 @@ from pystark import Stark
 
 
 if not DATABASE_URL:
-    pass
+    Stark.log('No DATABASE_URL defined. Exiting...', "critical")
+    raise SystemExit
 
 
 def start() -> scoped_session:

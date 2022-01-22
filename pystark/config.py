@@ -31,6 +31,8 @@ CMD_PREFIXES = list(os.environ.get("CMD_PREFIX", "/").strip())
 OWNER_ID = os.environ.get("OWNER_ID", 1946995626)
 TIMEZONE = os.environ.get("TIMEZONE", "Asia/Kolkata")
 
+DB_SESSION = os.environ.get("DB_SESSION", None)
+DB_CHAT_ID = os.environ.get("DB_CHAT_ID", 0)
 DATABASE_URL = os.environ.get("DATABASE_URL", None)
 if DATABASE_URL:
     DATABASE_URL = DATABASE_URL.replace("postgres", "postgresql")

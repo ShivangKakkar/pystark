@@ -1,15 +1,19 @@
 ChangeLog
 =========
 
-Latest Version - ``v0.2.9``
+Latest Version - ``v0.2.10``
+
+------------------
+
+.. confval:: v0.2.10
+
+- Use Telegram as a Database. :doc:`Read More About It </topics/telegramdb>`.
 
 ------------------
 
 .. confval:: v0.2.9
 
 - Fix Bugs of v0.2.8
-
-------------------
 
 .. confval:: v0.2.8
 
