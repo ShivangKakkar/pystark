@@ -1,6 +1,8 @@
 # IDEs
 .idea/
 .vscode/
+
+# Git
 .gitattributes
 
 # Python
@@ -19,8 +21,8 @@ MANIFEST
 /test.py
 /*.env
 .log
+/info.txt
 
 # Docs
 docs/_build
-docs/_static
-#docs/_templates
+docs/source/_local

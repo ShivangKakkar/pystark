@@ -2,47 +2,54 @@
 
 > A star ⭐ from you means a lot
 
-An incomplete add-on extension to [Pyrogram](https://pypi.org/project/Pyrogram), to create telegram bots a bit more easily.
+An add-on extension to [Pyrogram](https://pypi.org/project/Pyrogram) for absolute beginners, to create telegram bots more easily.
 
 
 ## Documentation
 
-Read the Documentation : https://pystark.codes
+Read the Documentation : https://pystark.codes/
 
 ## What's the main purpose?
 
-There are some things that are common in every bot. This makes it a bit simple to generate a boilerplate and ease overall creation.
+There are some things that are common in most of the telegram bots. This library simplifies the development process by generating boilerplate code and easing the overall creation.
 
-1. **Default Plugins** - Any bot created using `pystark` will automatically have some commands like */start*, */help*, */about* and */id*. 
+## Features
+
+1. **In-built/Default Plugins** - Any bot created using `pystark` will automatically have some commands like */start*, */help*, */about* and */id*.
 
    Of course that can be turned off using *default_plugins=False* in the main function.
 
-
-2. **Databases** - Both `postgres` and `redis` are ready to use once the environment variables are present. 
+2. **Databases** - There are in-built functions that help in using databases. The databases include `postgres`, `redis`, `tinydb` and `telegramdb`
  
-    To know more about **postgres** and **redis** usage in pystark - [Click Here](https://github.com/StarkBotsIndustries/PyStark/tree/master/pystark/database#databases)
+    To know more about using databases in pystark - [Click Here](https://pystark.codes/en/latest/topics/database/)
 
+3. **Boilerplate Code** - You can generate a boilerplate with all the files you will need using our command line utility. Optionally, you can generate it with added Heroku Support (app.json, Procfile, etc.).
 
-3. **Boilerplate** - You can generate a boilerplate with all the files you will need using our command line utility. Optionally, you can generate it with Heroku Support (app.json, Procfile, etc). Please scroll down below to `Usage` section to know how.
+   To know more, about generating a boilerplate - [Click Here](https://pystark.codes/en/latest/start/boilerplate/)
 
-
-4. **Easier** - There are multiple things that make it easier. 
+4. **Easy-To-Use** - There are multiple things that make this library easy-to-use.
    
-- Start the bot using 2-lines of code.
+- Start the bot using only 2-lines of code.
 
 ```python
 from pystark import Stark
 
 Stark().activate()
 ```
-- Easier to use methods and decorators
 
+- Easy-to-use methods and decorators.
+
+- Ability to customize everything.
+
+- And much more.
 
 ## Credits
 
 - [Dan](https://github.com/delivrance) for his [Pyrogram](https://github.com/pyrogram/pyrogram) Library on top of which **pystark** works.
 
 ## Community and Support
+
+PyStark Telegram Updates - **[pystark](https://t.me/pystark)**
 
 Telegram Channel - **[StarkBots](https://t.me/StarkBots)**
 
