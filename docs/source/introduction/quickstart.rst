@@ -17,7 +17,7 @@ Steps
 
     <a />
 
-2. Install PyStark with pip:
+2. Install PyStark with pip
 
 .. code-block:: console
 
@@ -29,31 +29,25 @@ Steps
 
     $ pystark --boilerplate
 
-4. Enter the newly created ``boilerplate`` directory.
+4. Enter the newly created :guilabel:`boilerplate` directory.
 
 .. code-block:: console
 
     $ cd boilerplate
 
-5. :ref:`Open the file manager in current directory. <open-file-manager>`
+5. :ref:`Open the file manager in current directory <open-file-manager>`.
 
 .. |b| raw:: html
 
     <b />
 
-6. Edit the ``.env`` file and fill your :guilabel:`API_ID`, :guilabel:`API_HASH` and :guilabel:`BOT_TOKEN`. Get the API keys from `<my.telegram.org>`_ and bot token from `BotFather <https://telegram.me/BotFather>`_
+6. Edit the ``.env`` file and fill your :guilabel:`API_ID`, :guilabel:`API_HASH` and :guilabel:`BOT_TOKEN`. Get the API keys from `<my.telegram.org>`_ and bot token from `BotFather <https://telegram.me/BotFather>`_.
 
 .. |c| raw:: html
 
     <c />
 
-7. Change the default values of messages in ``data.py``.
-
-.. |d| raw:: html
-
-    <d />
-
-8. Run the bot using python:
+7. Run the bot using python
 
 .. code-block:: console
 
@@ -72,10 +66,10 @@ Your bot now has four default commands:
 .. hlist::
     :columns: 1
 
-    - ``/start`` - Start the bot.
-    - ``/help`` - See a help message for the bot.
-    - ``/about`` - About the bot.
-    - ``/id`` - Get Telegram ID (also works in groups)
+    - :guilabel:`/start` - Start the bot.
+    - :guilabel:`/help` - See a help message for the bot.
+    - :guilabel:`/about` - About the bot.
+    - :guilabel:`/id` - Get Telegram ID (also works in groups)
 
 
-Stop the bot using ``Ctrl+C``.
+Stop the bot using :guilabel:`Ctrl+C`.

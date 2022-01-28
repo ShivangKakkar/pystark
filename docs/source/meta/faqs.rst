@@ -13,7 +13,15 @@ What is PyStark?
 
 - PyStark is a spoon-feeding not-even-library based on Pyrogram.
 
+.. |a| raw:: html
+
+    <a />
+
 - Pyrogram is a spoon-feeding MTProto Framework made in Python.
+
+.. |b| raw:: html
+
+    <b />
 
 - Python is a spoon-feeding programming language.
 
@@ -26,13 +34,13 @@ Where to run commands?
 
 This means that you are an absolute beginner.
 
-- If you are using ``Windows``, tap on Start button and search for **cmd** or **Command Prompt**.
+- If you are using :guilabel:`Windows`, tap on Start button and search for **cmd** or **Command Prompt**.
 
-.. |b| raw:: html
+.. |c| raw:: html
 
-    <b />
+    <c />
 
-- If you are using ``MacOS`` or ``Linux``, search for **Terminal**.
+- If you are using :guilabel:`MacOS` or :guilabel:`Linux`, search for **Terminal**.
 
 --------
 
@@ -41,19 +49,19 @@ This means that you are an absolute beginner.
 How to open file manager in current directory?
 ----------------------------------------------
 
-- For ``Windows`` use the start command:
+- For :guilabel:`Windows` use the start command:
 
 .. code-block:: console
 
     $ start .
 
-- For ``MacOS`` use the open command:
+- For :guilabel:`MacOS` use the open command:
 
 .. code-block:: console
 
     $ open .
 
-- For ``Linux`` use the xdg-open command:
+- For :guilabel:`Linux` use the xdg-open command:
 
 .. code-block:: console
 

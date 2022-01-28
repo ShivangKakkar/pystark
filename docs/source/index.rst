@@ -1,5 +1,5 @@
-Welcome to PyStark's documentation
-===================================
+Welcome to PyStark
+==================
 
 **PyStark** is a fast, easy-to-use tool for creating Telegram bots in Python that is completely powered by `Pyrogram <https://github.com/pyrogram/pyrogram>`_, one of the best MTProto Frameworks available.
 
@@ -28,11 +28,11 @@ How the Documentation is Organized
     - :doc:`Mandatory Variables <start/variables>` -  Setup the needed variables for bot.
     - :doc:`Customization <start/customization>` - Easily customize your bot.
     - :doc:`Creating Plugins <start/plugins>` - Code your own plugins
-    - :doc:`Run Bot <start/run>` - Run your bot locally.
-    - :doc:`Using Databases <topics/database>` - Use various databases with PyStark.
-    - :doc:`Class Stark <topics/stark>` -  The main class Stark.
+    - :doc:`Run Bot <start/running-bot>` - Run your bot locally.
+    - :doc:`Using Databases <topics/using-databases>` - Use various databases with PyStark.
+    - :doc:`Class Stark <topics/class-stark>` -  The main class Stark.
     - :doc:`Command Decorator <decorators/command>` - The main decorator in pystark.
-    - :doc:`Telegram as a Database <topics/telegramdb>` - Use telegram as a database.
+    - :doc:`Telegram as a Database <topics/telegram-as-database>` - Use telegram as a database.
 
 
 
@@ -53,6 +53,11 @@ Meta
 
 
 .. toctree::
+   :hidden:
+
+   Welcome to PyStark <https://pystark.codes/>
+
+.. toctree::
     :hidden:
     :caption: Introduction
 
@@ -67,24 +72,27 @@ Meta
     start/variables
     start/plugins
     start/customization
-    start/run
+    start/running-bot
 
 .. toctree::
     :hidden:
     :caption: Topics
 
-    topics/database
-    topics/telegramdb
+    topics/using-databases
+    topics/telegram-as-database
     topics/tinydb
     topics/postgres
-    topics/bot_menu
-    topics/stark
+    topics/bot-menu
+    topics/class-stark
 
 .. toctree::
     :hidden:
     :caption: Decorators
 
+    decorators/index
     decorators/command
+    decorators/callback
+    decorators/inline
 
 .. toctree::
     :hidden:

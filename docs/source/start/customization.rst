@@ -19,11 +19,11 @@ After you have finished generating a boilerplate, you will see a file named ``da
 
 **Special Keywords** - You may want to mention user or bot in ``start`` or ``help`` messages. You can use special keywords to do that. They will be replaced at runtime and will be different for all users.
 
-- ``{user}`` - User's first name
-- ``{bot}`` - Bot's name
-- ``{user_mentions}`` - User mention as a hyperlink
-- ``{bot_mentions}`` - Bot mention as a hyperlink
-- ``{owner}`` - Owner mention (only works if ``OWNER_ID`` is set else ``@StarkBots``)
+- :guilabel:`{user}` - User's first name
+- :guilabel:`{bot}` - Bot's name
+- :guilabel:`{user_mentions}` - User mention as a hyperlink
+- :guilabel:`{bot_mentions}` - Bot mention as a hyperlink
+- :guilabel:`{owner}` - Owner mention (only works if ``OWNER_ID`` is set else ``@StarkBots``)
 
 So let's say your ``start`` message is set to `Hi {user}` and your first name on telegram is `Stark` then bot will send `Hi Stark`.
 

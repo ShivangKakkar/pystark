@@ -68,7 +68,7 @@ Using Telegram as a Database
 
 You can use Telegram as a Database, thanks to `this project <https://pypi.org/project/TelegramDB/>`_.
 
-**But How?** - :doc:`Read Documentation Here </topics/telegramdb>`
+**But How?** - :doc:`Read Documentation Here </topics/telegram-as-database>`
 
 
 --------
@@ -76,7 +76,7 @@ You can use Telegram as a Database, thanks to `this project <https://pypi.org/pr
 Redis (using redis-py)
 ----------------------
 
-- **Variables** - You need to set ```REDIS_URL`` (public endpoint) and ``REDIS_PASSWORD`` by creating a database at `redislabs.com <https://redislabs.com>`_
+- **Variables** - You need to set ``REDIS_URL`` (public endpoint) and ``REDIS_PASSWORD`` by creating a database at `redislabs.com <https://redislabs.com>`_
 
 .. |b| raw:: html
 
