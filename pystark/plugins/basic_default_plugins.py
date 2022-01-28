@@ -22,7 +22,7 @@ from ..config import check_environment, OWNER_ID
 from pyrogram.errors import PeerIdInvalid
 from pyrogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
-module = check_environment()
+module = check_environment(False)
 
 
 @Stark.cmd('start', description="Start the bot", private_only=True)
@@ -72,7 +72,7 @@ async def id_func(_, msg):
             await msg.react("Chat ID is `{}` \n\nYour ID is `{}`".format(msg.chat.id, msg.from_user.id))
 
 
-@Stark.callback(in_list=['home', 'about', 'help'])
+@Stark.callback(query=['home', 'about', 'help'])
 async def basic_cb(bot: Stark, cb: CallbackQuery):
     chat_id = cb.from_user.id
     message_id = cb.message.message_id
@@ -128,13 +128,12 @@ async def replace(m, msg, bot):
         m = m.replace("{owner}", owner)
     return m
 
+# ToDO
+#   1. Don't repeat replace() function everywhere.
+#   2. Better management for 'module' variable like 'conf.py' of django.
+
 
 def send_buttons():
     if 'BUTTONS' in module.__dict__ and module.BUTTONS:
         return True
     return False
-
-
-# To-DO
-# Don't repeat replace() function everywhere
-# Better management for 'module' variable

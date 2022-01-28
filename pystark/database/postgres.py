@@ -69,7 +69,7 @@ async def get_db(table_name: str, primary_key, key: str = None):
     return _class_vars(query)
 
 
-async def set_db(table_name: str, primary_key, key: str, value) -> None:
+async def set_db(table_name: str, primary_key, key: str, value) -> bool:
     """Set data in postgres database using table name as string.
 
     Parameters:
@@ -84,16 +84,20 @@ async def set_db(table_name: str, primary_key, key: str, value) -> None:
 
         value:
             The value for the key.
+
+    Returns:
+        ``bool``: True on success
     """
     tables_dict = await _tables_dict()
     table_exists = await _table_exists(table_name)
     if not table_exists:
-        return
+        return False
     table = tables_dict[table_name]
     try:
         query = Session.query(table).get(primary_key)
         setattr(query, key, value)
         Session.commit()
+        return True
     except Exception as e:
         Session.rollback()
         Stark.log(str(e), "critical")

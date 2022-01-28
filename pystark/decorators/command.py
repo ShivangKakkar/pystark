@@ -41,10 +41,10 @@ class Command(OnMessage):
 
         `Parameters`:
             cmd (`str`, optional) -
-                Command that triggers your function. Can be None, if you only want to use extra_filters argument.
+                Command that triggers your function. Defaults to None, if you only want to use extra_filters argument.
 
             description (`str`,  optional) -
-                Command description to create Bot Menu. Defaults to None. :doc:`Read More </topics/bot_menu>`
+                Command description to create Bot Menu. Defaults to None. :doc:`Read More </topics/bot-menu>`
 
             group (`int`, optional) -
                 Define a group for this handler. Defaults to 0. `Read More <https://docs.pyrogram.org/topics/more-on-updates#handler-groups>`_
@@ -150,8 +150,6 @@ class Command(OnMessage):
             command_data["command_descriptions"][cmd] = description
         if owner_only:
             filters_ = filters_ & f.user(OWNER_ID)
-        if extra_filters:
-            filters_ = filters_ & extra_filters
         if private_only:
             filters_ = filters_ & f.private
         if group_only:

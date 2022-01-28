@@ -37,21 +37,77 @@ from pyrogram.errors import (
     UserDeactivated,
 )
 from .decorators.command import command_data
+from .constants import __version__
 
-data = {"plugins": 0, "plugins_list": []}
+__data__ = {"plugins": 0, "plugins_list": []}
+__printed__ = False
 
 
 class Stark(Client, Mechanism):
-    support = "@StarkBotsChat"
+    _support = "StarkBotsChat"
+    _updates = "pystark"
+    _channel = "StarkBots"
 
-    def __init__(self):
+    # ToDo:
+    #  Make some methods private [OOP 101].
+    #  Documentation for using things separately instead of activate().
+    #  Make activate() a staticmethod.
+
+    def __init__(self, **kwargs):
+        global __printed__
+        if not __printed__:
+            print(f'\nWelcome to PyStark [v{__version__}]')
+            print('Copyright (C) 2021-2022 Stark Bots <https://github.com/StarkBotsIndustries> \n')
+            __printed__ = True
         check_environment()
         super().__init__(
             ":memory:",
             api_id=int(API_ID),
             api_hash=API_HASH,
             bot_token=BOT_TOKEN,
+            **kwargs
         )
+
+    def activate(self, plugins: Union[str, list[str]] = 'plugins', default_plugins: bool = True, set_menu=True):
+        """Activate/Run your bot.
+
+        Parameters:
+            plugins (`str`):
+                Path of the 'plugins' directory in relation to the root directory.
+                If name of your directory is 'files' and it is in the same folder as 'bot.py', pass plugin='files'.
+                Defaults to 'plugins', i.e, a folder named 'plugins' in same directory as 'bot.py'
+
+            default_plugins (`bool`):
+                Pass False to disable default plugins. Defaults to True.
+
+            set_menu (`bool`):
+                Pass False to disable menu. Defaults to True.
+        """
+        try:
+            self.log("Starting the Bot")
+            self.start()
+            self.log("Loading Modules")
+            if isinstance(plugins, list):
+                for folder in plugins:
+                    Stark.log(f"Searching for plugins in '{folder}'...")
+                    self.load_modules(folder)
+            else:
+                self.load_modules(plugins)
+            if default_plugins:
+                from pystark import plugins as defaults
+                self.load_modules(defaults.__path__[0])
+            if set_menu:
+                self.log("Updating Bot Menu")
+                self.update_bot_menu()
+            else:
+                self.log("Skipping Bot Menu Update")
+            logger.info("{} is now running...".format('@' + self.get_me().username))
+            idle()
+        finally:
+            if set_menu:
+                self.remove_bot_menu()
+            self.stop()
+            logger.info("Bot has stopped working. For issues, visit <https://t.me/StarkBotsChat>")
 
     def start(self):
         try:
@@ -67,8 +123,61 @@ class Stark(Client, Mechanism):
             logger.critical(f"Account deleted. Time for me to rest.")
         except KeyboardInterrupt:
             logger.critical("Keyboard Interrupt. Exiting..")
-        logger.info("For support visit {}".format(Stark.support))
+        logger.info("For support visit @{}".format(self._support))
         raise SystemExit
+
+    @staticmethod
+    def list_modules(directory):
+        try:
+            if "/." not in directory:
+                directory = directory.replace('.', '/')
+            return [file[:-3] for file in os.listdir(directory) if file.endswith(".py")]
+        except FileNotFoundError:
+            logger.warn(f"No Plugins Found in '{directory}'!")
+            return
+
+    def load_modules(self, plugins: str):
+        modules = self.list_modules(plugins)
+        if not modules:
+            return
+        for module in modules:
+            if module.startswith("__"):
+                return
+            if 'pystark' in plugins:
+                plugins = 'pystark.plugins'
+            mod = import_module(plugins+'.'+module)
+            funcs = [func for func, _ in getmembers(mod, isfunction)]
+            for func in funcs:
+                try:
+                    for handler, group in getattr(mod, func).handlers:
+                        self.add_handler(handler, group)
+                except AttributeError:  # Other Functions shouldn't be included
+                    pass
+            __data__["plugins"] += 1
+            __data__["plugins_list"].append(module)
+            if module == "basic_default_plugins":
+                logger.info("Loaded In-Built [Default] Plugins")
+            else:
+                logger.info("Loaded - {}.py".format(module))
+
+    @staticmethod
+    def list_args(message: Union[Message, str], split: str = " "):
+        """List arguments passed in a message. Removes first word (the command itself)
+
+        Parameters:
+            message:
+                Pass a command message or message.text to get arguments passed in this message.
+
+            split (`str`):
+                How to split the arguments, Defaults to ' '.
+
+        **Example**: if text is "/start reply user", reply would be ["reply", "user"]
+        """
+        if isinstance(message, Message):
+            message = message.text
+        args = message.split(split)
+        args.pop(0)
+        return args
 
     @staticmethod
     def log(message, level: Union[str, int] = logging.INFO):
@@ -109,95 +218,6 @@ class Stark(Client, Mechanism):
             level = logging.DEBUG
         logger.log(level, message)
 
-    def activate(self, plugins: str = 'plugins', default_plugins: bool = True, set_menu=True):
-        """Activate/Run your bot.
-
-        Parameters:
-            plugins (`str`):
-                Path of the 'plugins' directory in relation to the root directory.
-                If name of your directory is 'files' and it is in the same folder as 'bot.py', pass plugin='files'.
-                Defaults to 'plugins', i.e, a folder named 'plugins' in same directory as 'bot.py'
-
-            default_plugins (`bool`):
-                Pass False to disable default plugins. Defaults to True.
-
-            set_menu (`bool`):
-                Pass False to disable menu. Defaults to True.
-        """
-        try:
-            self.log("Starting the Bot")
-            self.start()
-            self.log("Loading Modules")
-            if default_plugins:
-                from pystark import plugins as defaults
-                self.load_modules(defaults.__path__[0])
-            self.load_modules(plugins)
-            if set_menu:
-                self.log("Updating Bot Menu")
-                self.update_bot_menu()
-            else:
-                self.log("Skipping Bot Menu Update")
-            logger.info("{} is now running...".format('@' + self.get_me().username))
-            idle()
-        finally:
-            if set_menu:
-                self.remove_bot_menu()
-            self.stop()
-            logger.info("Bot has stopped working. For issues, visit <https://t.me/StarkBotsChat>")
-
-    def load_modules(self, plugins):
-        modules = self.list_modules(plugins)
-        if not modules:
-            return
-        for module in modules:
-            if module.startswith("__"):
-                return
-            if 'pystark' in plugins:
-                plugins = 'pystark.plugins'
-            mod = import_module(plugins+'.'+module)
-            funcs = [func for func, _ in getmembers(mod, isfunction)]
-            for func in funcs:
-                try:
-                    for handler, group in getattr(mod, func).handlers:
-                        self.add_handler(handler, group)
-                except AttributeError:  # Other Functions shouldn't be included
-                    pass
-            data["plugins"] += 1
-            data["plugins_list"].append(module)
-            if module == "basic":
-                logger.info("Loaded - Default Plugins")
-            else:
-                logger.info("Loaded - {}.py".format(module))
-
-    @staticmethod
-    def list_modules(directory):
-        try:
-            if "/." not in directory:
-                directory = directory.replace('.', '/')
-            return [file[:-3] for file in os.listdir(directory) if file.endswith(".py")]
-        except FileNotFoundError:
-            logger.warn("No Custom Plugins Found!")
-            return
-
-    @staticmethod
-    def list_args(message: Union[Message, str], split: str = " "):
-        """List arguments passed in a message. Removes first word (the command itself)
-
-        Parameters:
-            message:
-                Pass a command message or message.text to get arguments passed in this message.
-
-            split (`str`):
-                How to split the arguments, Defaults to ' '.
-
-        **Example**: if text is "/start reply user", reply would be ["reply", "user"]
-        """
-        if isinstance(message, Message):
-            message = message.text
-        args = message.split(split)
-        args.pop(0)
-        return args
-
     @staticmethod
     def data(key: str = None):
         """Returns a special dictionary with five keys.
@@ -228,11 +248,11 @@ class Stark(Client, Mechanism):
 
                 {"plugins": 2, "plugins_list": ["basic", "sample"], "commands": 5, "command_list": ["start", "help", "about", "id", "sample"]}, command_descriptions: {"start": "Start the bot"}
         """
-        data.update(command_data)
+        __data__.update(command_data)
         if not key:
-            return data
+            return __data__
         else:
-            return data[key]
+            return __data__[key]
 
     def update_bot_menu(self):
         dictionary = Stark.data("command_descriptions")

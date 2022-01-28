@@ -24,7 +24,7 @@ from pyrogram import Client
 from pystark import Stark
 from pystark.config import API_ID, API_HASH, DB_SESSION, DB_CHAT_ID
 from pystark.logger import logger
-from telegram import TelegramDB, DataPack, Member
+from telegramdb import TelegramDB, DataPack, Member
 
 if not DB_SESSION:
     Stark.log('No DB_SESSION defined. Exiting...', "critical")

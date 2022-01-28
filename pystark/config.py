@@ -40,7 +40,7 @@ REDIS_URL = os.environ.get("REDIS_URL", None)
 REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD", None)
 
 
-def check_environment():
+def check_environment(warn=True):
     if not API_ID:
         logger.critical("No API_ID found. Exiting...")
         raise SystemExit
@@ -58,11 +58,12 @@ def check_environment():
     try:
         int(OWNER_ID)
     except ValueError:
-        logger.warn("OWNER_ID is not a valid integer. Exiting...")
+        logger.critical("OWNER_ID is not a valid integer. Exiting...")
         raise SystemExit
     if os.path.exists('data.py'):
         module = import_module('data')
     else:
-        logger.warn("No 'data.py' found. Default values will be used.")
+        if warn:
+            logger.warn("No 'data.py' found. Default values will be used.")
         module = import_module('pystark.data')
     return module
