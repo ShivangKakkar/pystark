@@ -1,8 +1,9 @@
 import os
 import sys
-from pystark import __version__
 
 sys.path.insert(0, os.path.abspath('../..'))
+
+from pystark import __version__
 
 project = 'PyStark'
 copyright = '2021-2022, StarkProgrammer'

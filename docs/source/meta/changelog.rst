@@ -8,6 +8,9 @@ Latest Version - |code_version|
 .. confval:: v0.3.0
 
 - Additions
+    - Use inline mode and callback buttons more easily.
+    - Handle inline queries using ``Stark.inline()``.
+    - Handle callback queries using ``Stark.callback()``.
     - Load plugins from multiple directories. Instead of passing a 'str' to 'activate()' function, pass a list.
     - Allow passing other keyword arguments while creating bot client.
     - Override the in-built/default plugins automatically as they are loaded later now.
