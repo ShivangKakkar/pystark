@@ -16,9 +16,14 @@
 # You should have received a copy of the GNU General Public License
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
-
-from tinydb import TinyDB, Query
 from pystark import Stark
+try:
+    from tinydb import TinyDB, Query
+except ImportError:
+    import os
+    Stark.log('Installing tinydb...')
+    os.system('pip3 install tinydb~=4.6.1')
+    from tinydb import TinyDB, Query
 
 db = TinyDB('db.json')
 Stark.log('Initialized TinyDB')

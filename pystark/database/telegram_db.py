@@ -16,15 +16,20 @@
 # You should have received a copy of the GNU General Public License
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
-
+from pystark import Stark
+try:
+    from telegramdb import TelegramDB, DataPack, Member
+except ImportError:
+    import os
+    Stark.log('Installing TelegramDB...')
+    os.system('pip3 install TelegramDB==0.2.0')
+    from telegramdb import TelegramDB, DataPack, Member
 import os
 import sys
 import traceback
 from pyrogram import Client
-from pystark import Stark
 from pystark.config import API_ID, API_HASH, DB_SESSION, DB_CHAT_ID
 from pystark.logger import logger
-from telegramdb import TelegramDB, DataPack, Member
 
 if not DB_SESSION:
     Stark.log('No DB_SESSION defined. Exiting...', "critical")
@@ -44,7 +49,7 @@ if isinstance(DB_CHAT_ID, str) and DB_CHAT_ID[1:].isdigit():
 
 sys.stdout = open(os.devnull, 'w')
 try:
-    Session = TelegramDB(userbot, DB_CHAT_ID, debug=True, LOGGER=logger)
+    Session = TelegramDB(userbot, DB_CHAT_ID, debug=True, logger=logger)
     sys.stdout = sys.__stdout__
 except Exception as e:
     sys.stdout = sys.__stdout__

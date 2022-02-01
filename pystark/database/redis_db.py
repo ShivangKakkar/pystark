@@ -16,8 +16,14 @@
 # You should have received a copy of the GNU General Public License
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
-
-import redis
+from pystark import Stark
+try:
+    import redis
+except ImportError:
+    import os
+    Stark.log('Installing redis...')
+    os.system('pip3 install redis~=4.1.2')
+    import redis
 from ..config import REDIS_URL, REDIS_PASSWORD
 
 redis = redis.Redis.from_url('redis://'+REDIS_URL, password=REDIS_PASSWORD)

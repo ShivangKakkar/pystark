@@ -16,15 +16,23 @@
 # You should have received a copy of the GNU General Public License
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
-
+from pystark import Stark
+# Not a very good way but personalized automation and no extra dependencies.
+try:
+    import sqlalchemy
+except ImportError:
+    import os
+    Stark.log('Installing SQLAlchemy... [needed for postgres]')
+    os.system('pip3 install sqlalchemy~=1.4.31')
+    Stark.log('Installing psycopg2... [needed for postgres]')
+    os.system('pip3 install psycopg2')
+    import sqlalchemy
 import traceback
-import sqlalchemy
 from typing import Optional
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 from ..config import DATABASE_URL
-from pystark import Stark
 
 
 if not DATABASE_URL:

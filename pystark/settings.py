@@ -38,4 +38,4 @@ More Bots - @StarkBots
 Support Group - @StarkBotsChat
 """
 
-# START_PUBLIC = "Hey :) PM me if you have any questions on how to use me."
+# START_IN_GROUPS = "Hey :) PM me if you have any questions on how to use me."

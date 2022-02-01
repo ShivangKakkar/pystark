@@ -11,9 +11,9 @@ pytz~=2021.3
 # Extend
 pyromod~=1.5
 
-# Databases
-redis~=4.1.2
-SQLAlchemy~=1.4.31
-psycopg2
-TelegramDB==0.2.0
-tinydb~=4.6.1
+# Databases [Optional]
+# redis~=4.1.2
+# SQLAlchemy~=1.4.31
+# psycopg2
+# TelegramDB==0.2.0
+# tinydb~=4.6.1
