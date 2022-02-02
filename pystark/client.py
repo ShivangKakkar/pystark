@@ -28,7 +28,7 @@ from pyrogram.types import Message
 from pyrogram.types import BotCommand
 from importlib import import_module
 from inspect import getmembers, isfunction
-from .config import API_ID, API_HASH, BOT_TOKEN, check_environment
+from .config import ENV
 from pyrogram.errors import (
     ApiIdInvalid,
     AccessTokenInvalid,
@@ -59,12 +59,12 @@ class Stark(Client, Mechanism):
             print(f'\nWelcome to PyStark [v{__version__}]')
             print('Copyright (C) 2021-2022 Stark Bots <https://github.com/StarkBotsIndustries> \n')
             __printed__ = True
-        check_environment()
+        env = ENV()
         super().__init__(
             ":memory:",
-            api_id=int(API_ID),
-            api_hash=API_HASH,
-            bot_token=BOT_TOKEN,
+            api_id=env.API_ID,
+            api_hash=env.API_HASH,
+            bot_token=env.BOT_TOKEN,
             **kwargs
         )
 

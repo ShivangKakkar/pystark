@@ -16,13 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
-
 from ..client import Stark
-from ..config import check_environment, OWNER_ID
+from ..config import settings, ENV
 from pyrogram.errors import PeerIdInvalid
 from pyrogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
-module = check_environment(False)
+module = settings()
+OWNER_ID = ENV().OWNER_ID
 
 
 @Stark.cmd('start', description="Start the bot", private_only=True)
@@ -122,7 +122,8 @@ async def replace(m, msg, bot):
         m = m.replace("{bot_mention}", (await bot.get_me()).mention)
     if '{owner}' in m:
         try:
-            owner = (await bot.get_users(int(OWNER_ID))).mention
+            owner_id = OWNER_ID[0] if isinstance(OWNER_ID, list) else OWNER_ID
+            owner = (await bot.get_users(owner_id)).mention
         except PeerIdInvalid:
             owner = '@StarkBots'
         m = m.replace("{owner}", owner)

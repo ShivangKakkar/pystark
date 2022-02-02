@@ -28,8 +28,14 @@ import os
 import sys
 import traceback
 from pyrogram import Client
-from pystark.config import API_ID, API_HASH, DB_SESSION, DB_CHAT_ID
-from pystark.logger import logger
+from ..config import ENV
+from ..logger import logger
+
+env = ENV()
+DB_SESSION = env.DB_SESSION
+DB_CHAT_ID = env.DB_CHAT_ID
+API_ID = env.API_ID
+API_HASH = env.API_HASH
 
 if not DB_SESSION:
     Stark.log('No DB_SESSION defined. Exiting...', "critical")

@@ -18,8 +18,9 @@
 
 
 from pyrogram import filters as f
-from ..config import CMD_PREFIXES, OWNER_ID
+from ..config import ENV
 from pyrogram.methods.decorators.on_message import OnMessage
+
 
 command_data = {"commands": 0, "commands_list": [], "command_descriptions": {}}
 
@@ -139,17 +140,17 @@ class Command(OnMessage):
         elif cmd and extra_filters:
             command_data["commands"] += 1
             command_data["commands_list"].append(cmd)
-            filters_ = f.command(cmd, prefixes=CMD_PREFIXES) & extra_filters
+            filters_ = f.command(cmd, prefixes=ENV.CMD_PREFIXES) & extra_filters
         elif extra_filters:
             filters_ = extra_filters
         else:
             command_data["commands"] += 1
             command_data["commands_list"].append(cmd)
-            filters_ = f.command(cmd, prefixes=CMD_PREFIXES)
+            filters_ = f.command(cmd, prefixes=ENV.CMD_PREFIXES)
         if cmd and description:
             command_data["command_descriptions"][cmd] = description
         if owner_only:
-            filters_ = filters_ & f.user(OWNER_ID)
+            filters_ = filters_ & f.user(ENV().OWNER_ID)
         if private_only:
             filters_ = filters_ & f.private
         if group_only:

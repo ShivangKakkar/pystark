@@ -19,7 +19,7 @@
 
 from typing import Union
 from ..logger import logger
-from ..config import OWNER_ID
+from ..config import ENV
 from pyrogram import filters as f
 from pyrogram.methods.decorators.on_callback_query import OnCallbackQuery
 
@@ -127,6 +127,6 @@ class Callback(OnCallbackQuery):
         else:
             filters_ = cmd_filter
         if owner_only:
-            filters_ = filters_ & f.user(OWNER_ID)
+            filters_ = filters_ & f.user(ENV().OWNER_ID)
         decorator = OnCallbackQuery.on_callback_query(filters_, group)
         return decorator

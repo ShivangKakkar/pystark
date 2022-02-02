@@ -32,9 +32,10 @@ from typing import Optional
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
-from ..config import DATABASE_URL
+from ..config import ENV
 from sqlalchemy.exc import ProgrammingError
 
+DATABASE_URL = ENV.DATABASE_URL
 
 if not DATABASE_URL:
     Stark.log('No DATABASE_URL defined. Exiting...', "critical")

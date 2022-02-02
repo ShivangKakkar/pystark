@@ -19,7 +19,7 @@
 from ..logger import logger
 from typing import Union, List
 from pyrogram import filters as f
-from ..config import OWNER_ID
+from ..config import ENV
 from pyrogram.methods.decorators.on_inline_query import OnInlineQuery
 
 
@@ -133,6 +133,6 @@ class Inline(OnInlineQuery):
         else:
             filters_ = cmd_filter
         if owner_only:
-            filters_ = filters_ & f.user(OWNER_ID)
+            filters_ = filters_ & f.user(ENV.OWNER_ID)
         decorator = OnInlineQuery.on_inline_query(filters_, group)
         return decorator

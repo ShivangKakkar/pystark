@@ -24,6 +24,9 @@ except ImportError:
     Stark.log('Installing redis...')
     os.system('pip3 install redis~=4.1.2')
     import redis
-from ..config import REDIS_URL, REDIS_PASSWORD
+from ..config import ENV
+
+REDIS_URL = ENV.REDIS_URL
+REDIS_PASSWORD = ENV.REDIS_PASSWORD
 
 redis = redis.Redis.from_url('redis://'+REDIS_URL, password=REDIS_PASSWORD)
