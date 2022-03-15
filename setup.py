@@ -18,25 +18,21 @@
 
 
 from setuptools import setup, find_packages
-from pystark import __version__
-from pystark import __description__
 
 with open("README.md", encoding="utf-8") as f:
     long_description = "\n".join([x for x in f.read().split("\n") if not x.startswith('>')])
 
 with open("requirements.txt", encoding="utf-8") as r:
-    install_requires = [i.strip() for i in r]
+    install_requires = [i.strip() for i in r if not i.startswith('#')]
 
 packages = find_packages()
-version = __version__
-description = __description__
 
 setup(
     name='PyStark',
     packages=packages,
-    version=version,
+    version='0.4.0',
     license='GPLv3+',
-    description=description,
+    description="An add-on extension to Pyrogram for absolute beginners",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='StarkProgrammer',

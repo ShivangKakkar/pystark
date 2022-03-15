@@ -91,10 +91,10 @@ class Database:
         table = tables_dict[table_name]
         query = Session.query(table).get(primary_key)
         if key:
-            return query[key]
+            return getattr(query, key)
         return await self._class_vars(query)
 
-    async def set(self, table_name: str, primary_key, key: str, value) -> bool:
+    async def set(self, table_name: str, primary_key, key: str, value):
         """Set data in postgres database using table name as string.
 
         Parameters:
@@ -116,7 +116,7 @@ class Database:
         tables_dict = await self._tables_dict()
         table_exists = await self._table_exists(table_name)
         if not table_exists:
-            return False
+            raise TableNotFound
         table = tables_dict[table_name]
         try:
             query = Session.query(table).get(primary_key)
@@ -127,7 +127,6 @@ class Database:
                 setattr(row, key, value)
                 Session.add(row)
             Session.commit()
-            return True
         except Exception:
             Session.rollback()
             raise

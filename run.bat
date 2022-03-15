@@ -2,10 +2,11 @@
 TITLE PyStark Batch Script File
 
 @REM HELP
+cls
 if "%1" == "help" set true=1
 if "%1" == "" set true=1
 if defined true (
-    echo Usage: run [[delete^|docs^|test^|main]] [open]
+    echo Usage: run [[delete^|docs^|freeze^|test^|main]] [open]
     echo.
     echo 'test' - upload to test-pypi
     echo 'main' - upload to pypi
@@ -50,6 +51,12 @@ python setup.py sdist
 if "%1" == "dist" exit /b 0
 echo.
 
+@REM FREEZE
+echo [Freezing Requirements]
+pip freeze > frozen-requirements.txt
+if "%1" == "freeze" exit /b 0
+echo.
+
 @REM TEST/MAIN
 
 if "%1" == "test" goto :test
@@ -69,4 +76,4 @@ echo.
 echo [All Done]
 exit /b 0
 
-@REM To-Do : Create command-line tool using Python instead [*python developer lol*]
+@REM To-Do : Create command-line tool using Python/GoLang instead

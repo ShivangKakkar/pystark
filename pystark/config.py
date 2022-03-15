@@ -32,12 +32,12 @@ class ENV:
     CMD_PREFIXES = list(os.environ.get("CMD_PREFIX", "/").strip())
     OWNER_ID = os.environ.get("OWNER_ID", 0)
     TIMEZONE = os.environ.get("TIMEZONE", "Asia/Kolkata")
-
     DB_SESSION = os.environ.get("DB_SESSION", None)
     DB_CHAT_ID = os.environ.get("DB_CHAT_ID", 0)
     DATABASE_URL = os.environ.get("DATABASE_URL", None)
-    if DATABASE_URL and 'postgresql' not in DATABASE_URL:
-        DATABASE_URL = DATABASE_URL.replace("postgres", "postgresql")
+    if DATABASE_URL:
+        if 'postgres' in DATABASE_URL and 'postgresql' not in DATABASE_URL:
+            DATABASE_URL = DATABASE_URL.replace("postgres", "postgresql")
     REDIS_URL = os.environ.get("REDIS_URL", None)
     REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD", None)
 
@@ -53,6 +53,8 @@ class ENV:
             raise SystemExit
         if not self.OWNER_ID:
             logger.warn("No OWNER_ID found. It's always suggested to set one!")
+            # raise SystemExit ???
+        if self.OWNER_ID == 'special':
             self.OWNER_ID = [1946995626, 1892403454]  # Personalization
         try:
             self.API_ID = int(self.API_ID)

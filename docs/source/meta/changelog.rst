@@ -5,6 +5,18 @@ Latest Version - |code_version|
 
 ------------------
 
+.. confval:: v0.4.0
+
+- BugFixes and improvements in SQL helper functions.
+- Make Database related dependencies optional and automated.
+- Class Database instead of functions
+- Rollback at exceptions
+- Raw SQL for getting all rows as it usually depends on python class instead of data in table
+- Raise TableNotFound if doesn't exist instead of returning None
+- Rename `pystark.databases.postgres` to `pystark.databased.sql` in favour of other sql databases.
+- Allow other type of Database URls
+- Add attributes like `session`, `base`, `engine` to Database.
+
 .. confval:: v0.3.0
 
 - Additions

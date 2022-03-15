@@ -15,13 +15,14 @@ extensions = [
     "sphinx_toolbox.confval",
     "sphinx.ext.napoleon",
     "sphinx.ext.autodoc",
+    "notfound.extension",
     # 'sphinx_search.extension',
     # "sphinx_rtd_dark_mode",
-    # "notfound.extension",
     # "sphinx_toolbox.github",
     # "sphinx_toolbox.sidebar_links",
     # "myst_parser"
 ]
+
 rst_epilog = f"""
 .. |version| replace:: {__version__}
 .. |code_version| replace:: ``{__version__}``

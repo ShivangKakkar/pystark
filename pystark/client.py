@@ -44,9 +44,9 @@ __printed__ = False
 
 
 class Stark(Client, Mechanism):
-    _support = "StarkBotsChat"
-    _updates = "pystark"
-    _channel = "StarkBots"
+    __support__ = "StarkBotsChat"
+    __updates__ = "pystark"
+    __channel__ = "StarkBots"
 
     # ToDo:
     #  Make some methods private [OOP 101].
@@ -56,7 +56,7 @@ class Stark(Client, Mechanism):
     def __init__(self, **kwargs):
         global __printed__
         if not __printed__:
-            print(f'\nWelcome to PyStark [v{__version__}]')
+            print(f'Welcome to PyStark [v{__version__}]')
             print('Copyright (C) 2021-2022 Stark Bots <https://github.com/StarkBotsIndustries> \n')
             __printed__ = True
         env = ENV()
@@ -105,9 +105,14 @@ class Stark(Client, Mechanism):
             idle()
         finally:
             if set_menu:
-                self.remove_bot_menu()
+                try:
+                    self.remove_bot_menu()
+                except ConnectionError:
+                    pass
             self.stop()
             logger.info("Bot has stopped working. For issues, visit <https://t.me/StarkBotsChat>")
+
+    run = activate  # alias
 
     def start(self):
         try:
@@ -123,18 +128,17 @@ class Stark(Client, Mechanism):
             logger.critical(f"Account deleted. Time for me to rest.")
         except KeyboardInterrupt:
             logger.critical("Keyboard Interrupt. Exiting..")
-        logger.info("For support visit @{}".format(self._support))
+        logger.info("For support visit @{}".format(self.__support__))
         raise SystemExit
 
     @staticmethod
     def list_modules(directory):
-        try:
-            if "/." not in directory:
-                directory = directory.replace('.', '/')
-            return [file[:-3] for file in os.listdir(directory) if file.endswith(".py")]
-        except FileNotFoundError:
-            logger.warn(f"No Plugins Found in '{directory}'!")
+        if not os.path.exists(directory):
+            Stark.log(f"No directory named '{directory}' found")
             return
+        if "/." not in directory:
+            directory = directory.replace('.', '/')
+        return [file[:-3] for file in os.listdir(directory) if file.endswith(".py")]
 
     def load_modules(self, plugins: str):
         modules = self.list_modules(plugins)
@@ -161,7 +165,7 @@ class Stark(Client, Mechanism):
                 logger.info("Loaded - {}.py".format(module))
 
     @staticmethod
-    def list_args(message: Union[Message, str], split: str = " "):
+    def list_args(message: Union[Message, str], split: str = " ") -> list[str]:
         """List arguments passed in a message. Removes first word (the command itself)
 
         Parameters:

@@ -1,5 +1,5 @@
 Customization
-=========================
+=============
 
 There are a lot of customization options in PyStark to customize the behavior of your bot.
 
@@ -15,7 +15,7 @@ Change the default messages
 
 PyStark comes with in-built plugins like ``start`` and ``help``. But what if you want to have different messages than the in-built ones? They are easily customizable.
 
-After you have finished generating a boilerplate, you will see a file named ``data.py``. You can change it's values to change the default messages.
+After you have finished generating a boilerplate, you will see a file named ``settings.py``. You can change it's values to change the default messages.
 
 **Special Keywords** - You may want to mention user or bot in ``start`` or ``help`` messages. You can use special keywords to do that. They will be replaced at runtime and will be different for all users.
 

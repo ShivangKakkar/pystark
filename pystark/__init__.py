@@ -19,7 +19,7 @@
 
 from .client import Stark
 from .methods import Message
-from .logger import logger
+# from .logger import logger
 from pyrogram import filters
 from .constants import (
     __version__,

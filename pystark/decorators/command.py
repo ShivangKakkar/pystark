@@ -136,7 +136,7 @@ class Command(OnMessage):
             @Stark.command(extra_filters=filters.text | filters.media)
         """
         if not cmd and not extra_filters:
-            filters_ = None
+            filters_ = f.all
         elif cmd and extra_filters:
             command_data["commands"] += 1
             command_data["commands_list"].append(cmd)

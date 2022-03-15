@@ -18,10 +18,12 @@ MANIFEST
 *.egg-info
 
 # Local
+tests/
 /test.py
 /*.env
 .log
 /info.txt
+examples/
 
 # Docs
 docs/_build
