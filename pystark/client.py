@@ -145,8 +145,6 @@ class Stark(Client, Mechanism):
         if not modules:
             return
         for module in modules:
-            if module.startswith("__"):
-                return
             if 'pystark' in plugins:
                 plugins = 'pystark.plugins'
             mod = import_module(plugins+'.'+module)
