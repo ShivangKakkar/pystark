@@ -1,6 +1,6 @@
 # Creating Plugins
 
-Some Python knowledge is required to create plugins in general. Therefore, I highly recommend you to learn Python first. [Please see this FAQ](/faqs#learn-python)
+Some Python knowledge is required to create plugins in general. Therefore, I highly recommend you to learn Python first. [Please see this FAQ](/meta/faqs#learn-python)
 
 !!! note
 

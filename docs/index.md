@@ -39,5 +39,5 @@ Just tap on ``Next`` button below every page, keep reading while following the s
 
 ## Meta
 
-- [PyStark FAQs](/docs/faqs.md) - Answer to common PyStark questions.
-- [ChangeLog](/docs/changelog.md) - ChangeLog for PyStark releases.
+- [PyStark FAQs](meta/faqs) - Answer to common PyStark questions.
+- [ChangeLog](/meta/changelog) - ChangeLog for PyStark releases.

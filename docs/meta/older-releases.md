@@ -4,7 +4,7 @@
 
     These are the changelog for older versions. Latest Version is 1.0.0
 
-    Please see the [changelog for latest versions](/changelog)
+    Please see the [changelog for latest versions](/meta/changelog)
 
 ---
 

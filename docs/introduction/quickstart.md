@@ -9,7 +9,7 @@ Following these steps will allow you to see **PyStark** in action as quickly as 
 
 ## Steps
 
-1\. [Open up your terminal](/faqs#terminal).
+1\. [Open up your terminal](/meta/faqs#terminal).
 
 2\. Install PyStark with pip
 
@@ -29,7 +29,7 @@ $ pystark --boilerplate
 $ cd boilerplate
 ```
 
-5\. [Open the file manager in current directory](/faqs#file-manager).
+5\. [Open the file manager in current directory](/meta/faqs#file-manager).
 
 6\. Edit the ``.env`` file and fill your `API_ID`, `API_HASH` and `BOT_TOKEN`. Get the API keys from [my.telegram.org](https://my.telegram.org) and bot token from [BotFather](https://telegram.me/BotFather).
 

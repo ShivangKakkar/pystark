@@ -1,5 +1,5 @@
 site_name: PyStark
-site_description: Haha
+site_description: The awesome python library to create Telegram Bots based on pyrogram. Updates available at https://t.me/pystark
 site_author: StarkProgrammer
 repo_name: starkbotsindustries/pystark
 repo_url: https://github.com/StarkBotsIndustries/pystark
@@ -40,10 +40,9 @@ nav:
     - decorators/command.md
     - decorators/callback.md
     - decorators/inline.md
-  - FAQ: faqs.md
-  - Changelog:
-    - changelog.md
-    - older-releases.md
+  - FAQ: meta/faqs.md
+  - meta/changelog.md
+  - meta/older-releases.md
 
 markdown_extensions:
   - codehilite:
