@@ -47,10 +47,10 @@
       "required": false,
       "value": ""
     },
-    "TIMEZONE": {
-      "description": "Don't change if you are from India",
+    "SUDO_USERS": {
+      "description": "Sudo users separated by whitespace (' ')",
       "required": false,
-      "value": "Asia/Kolkata"
+      "value": ""
     }
   }
 }

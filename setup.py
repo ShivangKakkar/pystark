@@ -16,8 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
-
-from setuptools import setup, find_packages
+import os
+import re
+from setuptools import setup
 
 with open("README.md", encoding="utf-8") as f:
     long_description = "\n".join([x for x in f.read().split("\n") if not x.startswith('>')])
@@ -25,14 +26,24 @@ with open("README.md", encoding="utf-8") as f:
 with open("requirements.txt", encoding="utf-8") as r:
     install_requires = [i.strip() for i in r if not i.startswith('#')]
 
-packages = find_packages()
+with open("pystark/constants.py", "r") as f:
+    text = f.read()
+    pat = r"['\"]([^'\"]+)['\"]"
+    version = re.search("__version__ = "+pat, text).group(1)
+    beta_version = re.search("__beta_version__ = "+pat, text).group(1)
+    description = re.search("__description__ = "+pat, text).group(1)
+
+
+def get_packages():
+    return [path.replace("\\", ".").replace("/", ".") for path, _, _ in os.walk("pystark") if "__" not in path]
+
 
 setup(
     name='PyStark',
-    packages=packages,
-    version='0.4.0',
+    packages=get_packages(),
+    version=version,
     license='GPLv3+',
-    description="An add-on extension to Pyrogram for absolute beginners",
+    description=description,
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='StarkProgrammer',

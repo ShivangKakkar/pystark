@@ -7,9 +7,13 @@ build:
   tools:
     python: "3.10"
 
-sphinx:
-   configuration: docs/source/conf.py
-   builder: html
+#sphinx:
+#   configuration: docs/source/conf.py
+#   builder: html
+
+mkdocs:
+  configuration: mkdocs.yml
+  fail_on_warning: false
 
 formats:
   - pdf

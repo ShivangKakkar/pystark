@@ -1,35 +1,11 @@
-START = """
-Hey {user}
+START = "do this"
 
-Welcome to {bot}
+HELP = "Help Message"
 
-I can 
-Use below buttons to learn more.
+ABOUT = "do this"
 
-By @StarkBots
-"""
+REPO = "pystark"
 
-HELP = """
-✨ **Available Commands** ✨
+DATABASE_TABLES = ["users"]
 
-/about - About The Bot
-/help - This Message
-/start - Start the Bot
-/id - Get your ID
-"""
-
-ABOUT = """
-**About This Bot** 
-
-A telegram bot to 
-
-Source Code : [Click Here](https://github.com/StarkBotsIndustries/)
-
-Framework : [Pyrogram](docs.pyrogram.org)
-
-Language : [Python](www.python.org)
-
-Developer : @StarkProgrammer
-"""
-
-BUTTONS = True
+STARKBOTS = True

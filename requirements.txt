@@ -1,5 +1,7 @@
-pyrogram~=1.4.8
-TgCrypto==1.2.3
+pyrogram>=1.4.12
+TgCrypto>=1.2.3
 python-dotenv>=0.19.2
 pytz>=2021.3
 pyromod==1.5
+sqlalchemy>=1.4.34
+psycopg2>=2.9.3

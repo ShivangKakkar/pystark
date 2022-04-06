@@ -18,17 +18,23 @@
 
 
 import os
+import ntpath
 import struct
 import logging
-from .logger import logger
+import importlib
+import importlib.util
 from typing import Union
-from .decorators import Mechanism
-from pyrogram import Client, idle, raw
+from pystark.logger import logger
 from pyrogram.types import Message
 from pyrogram.types import BotCommand
-from importlib import import_module
+from pyrogram import Client, idle, raw
+from pystark.decorators import Mechanism
+from pystark.config import ENV, settings
+from pystark.constants import __version__
 from inspect import getmembers, isfunction
-from .config import ENV
+from pystark.decorators.command import command_data, sudo_cmds
+from pystark.plugins.models.users import Users
+from pystark.plugins.models.bans import Bans
 from pyrogram.errors import (
     ApiIdInvalid,
     AccessTokenInvalid,
@@ -36,8 +42,6 @@ from pyrogram.errors import (
     AuthKeyUnregistered,
     UserDeactivated,
 )
-from .decorators.command import command_data
-from .constants import __version__
 
 __data__ = {"plugins": 0, "plugins_list": []}
 __printed__ = False
@@ -68,35 +72,32 @@ class Stark(Client, Mechanism):
             **kwargs
         )
 
-    def activate(self, plugins: Union[str, list[str]] = 'plugins', default_plugins: bool = True, set_menu=True):
-        """Activate/Run your bot.
-
-        Parameters:
-            plugins (`str`):
-                Path of the 'plugins' directory in relation to the root directory.
-                If name of your directory is 'files' and it is in the same folder as 'bot.py', pass plugin='files'.
-                Defaults to 'plugins', i.e, a folder named 'plugins' in same directory as 'bot.py'
-
-            default_plugins (`bool`):
-                Pass False to disable default plugins. Defaults to True.
-
-            set_menu (`bool`):
-                Pass False to disable menu. Defaults to True.
-        """
+    def activate(self):
+        """Main method of `Stark` class which loads plugins and activates/runs your bot."""
+        module = settings()
         try:
             self.log("Starting the Bot")
             self.start()
             self.log("Loading Modules")
+            plugins = getattr(module, "PLUGINS")
             if isinstance(plugins, list):
                 for folder in plugins:
                     Stark.log(f"Searching for plugins in '{folder}'...")
                     self.load_modules(folder)
             else:
                 self.load_modules(plugins)
-            if default_plugins:
-                from pystark import plugins as defaults
-                self.load_modules(defaults.__path__[0])
-            if set_menu:
+            from pystark.plugins import addons as plugins
+            addons = module.ADDONS
+            if module.STARKBOTS:
+                addons.append("buttons")
+            for i in addons:
+                path = plugins.__path__[0]+f"/{i}"
+                if not path.endswith(".py"):
+                    path += ".py"
+                self.load_modules(path)
+            for i in module.DATABASE_TABLES:
+                self._load_sql_model(i)
+            if getattr(module, "SET_BOT_MENU"):
                 self.log("Updating Bot Menu")
                 self.update_bot_menu()
             else:
@@ -104,7 +105,7 @@ class Stark(Client, Mechanism):
             logger.info("{} is now running...".format('@' + self.get_me().username))
             idle()
         finally:
-            if set_menu:
+            if getattr(module, "SET_BOT_MENU"):
                 try:
                     self.remove_bot_menu()
                 except ConnectionError:
@@ -112,7 +113,9 @@ class Stark(Client, Mechanism):
             self.stop()
             logger.info("Bot has stopped working. For issues, visit <https://t.me/StarkBotsChat>")
 
-    run = activate  # alias
+    def run(self):
+        """Alias of `Stark.activate()`"""
+        self.activate()
 
     def start(self):
         try:
@@ -133,6 +136,7 @@ class Stark(Client, Mechanism):
 
     @staticmethod
     def list_modules(directory):
+        """List all modules in a directory"""
         if not os.path.exists(directory):
             Stark.log(f"No directory named '{directory}' found")
             return
@@ -141,13 +145,23 @@ class Stark(Client, Mechanism):
         return [file[:-3] for file in os.listdir(directory) if file.endswith(".py")]
 
     def load_modules(self, plugins: str):
-        modules = self.list_modules(plugins)
+        """Load all modules from a directory or a single module as pyrogram handlers"""
+        if plugins.endswith(".py"):
+            plugins = os.path.abspath(plugins)
+            x, y = ntpath.split(plugins)
+            file = y or ntpath.basename(x)
+            plugins = x if y else ntpath.dirname(x)
+            plugins = ntpath.relpath(plugins)
+            modules = [file[:-3]]
+        else:
+            modules = self.list_modules(plugins)
         if not modules:
             return
         for module in modules:
-            if 'pystark' in plugins:
-                plugins = 'pystark.plugins'
-            mod = import_module(plugins+'.'+module)
+            plugins = os.path.abspath(plugins)
+            spec = importlib.util.spec_from_file_location(module, plugins+"/"+module+".py")
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
             funcs = [func for func, _ in getmembers(mod, isfunction)]
             for func in funcs:
                 try:
@@ -157,23 +171,25 @@ class Stark(Client, Mechanism):
                     pass
             __data__["plugins"] += 1
             __data__["plugins_list"].append(module)
-            if module == "basic_default_plugins":
-                logger.info("Loaded In-Built [Default] Plugins")
+            if "addons" in plugins:
+                logger.info("Loaded addon - {}.py".format(module))
             else:
-                logger.info("Loaded - {}.py".format(module))
+                logger.info("Loaded plugin - {}.py".format(module))
+        # logger.info("Loaded In-Built [Default] Plugins")
 
     @staticmethod
     def list_args(message: Union[Message, str], split: str = " ") -> list[str]:
         """List arguments passed in a message. Removes first word (the command itself)
 
         Parameters:
-            message:
-                Pass a command message or message.text to get arguments passed in this message.
 
-            split (`str`):
-                How to split the arguments, Defaults to ' '.
+            message (pystark.Message): Pass a command message or message.text to get arguments passed in this message.
 
-        **Example**: if text is "/start reply user", reply would be ["reply", "user"]
+            split (str, optional): Define how to split the arguments, defaults to whitespace.
+
+        Example:
+
+            If text is `/start reply user`, return value would be `["reply", "user"]`
         """
         if isinstance(message, Message):
             message = message.text
@@ -185,26 +201,18 @@ class Stark(Client, Mechanism):
     def log(message, level: Union[str, int] = logging.INFO):
         """Log messages to console.
 
-        .. list-table:: Possible values for Level
-           :widths: 50 50
-           :header-rows: 1
-
-           * - String
-             - Integer
-           * - **debug**
-             - 10
-           * - **info**
-             - 20
-           * - **warning**
-             - 30
-           * - **error**
-             - 40
-           * - **critical**
-             - 50
+        | String       | Integer  |
+        |:------------:|:--------:|
+        | **debug**    | 10       |
+        | **info**     | 20       |
+        | **warning**  | 30       |
+        | **error**    | 40       |
+        | **critical** | 50       |
 
         Parameters:
-            message: Item to print to console.
-            level: Logging level as string or int.
+
+            message (Any): Item to print to console.
+            level (optional): Logging level as string or int.
         """
         if isinstance(level, str):
             level = level.lower()
@@ -224,37 +232,34 @@ class Stark(Client, Mechanism):
     def data(key: str = None):
         """Returns a special dictionary with five keys.
 
-        .. list-table:: Possible Keys
-           :widths: 25 75
-           :header-rows: 1
-
-           * - Key
-             - Returns
-           * - **plugins**
-             - number of plugins in bot
-           * - **plugins_list**
-             - list of plugins in bot
-           * - **commands**
-             - number of commands in bot
-           * - **commands_list**
-             - list of commands in bot
-           * - **command_descriptions**
-             - command_descriptions dictionary if passed in ``Stark.cmd`` decorator
+        | Key                      | Returns                   |
+        |:------------------------:|:-------------------------:|
+        | **plugins**              | number of plugins in bot  |
+        | **plugins_list**         | list of plugins in bot    |
+        | **commands**             | number of commands in bot |
+        | **commands_list**        | list of commands in bot   |
+        | **command_descriptions** | dictionary of command and their descriptions if passed in ``Stark.cmd`` decorator |
 
         Parameters:
-            key (`str`) :
-                Return only one of the five keys from ["plugins", "plugins_list", "commands", "commands_list", "command_descriptions"]
+
+            key (str, optional) : If you want to get only one of the five keys from `["plugins", "plugins_list", "commands", "commands_list", "command_descriptions"]`
 
         Example:
-            .. code-block:: python
 
-                {"plugins": 2, "plugins_list": ["basic", "sample"], "commands": 5, "command_list": ["start", "help", "about", "id", "sample"]}, command_descriptions: {"start": "Start the bot"}
+            ```python
+            {"plugins": 2, "plugins_list": ["basic", "sample"], "commands": 5, "command_list": ["start", "help", "about", "id", "sample"]}, command_descriptions: {"start": "Start the bot"}
+            ```
         """
         __data__.update(command_data)
         if not key:
             return __data__
         else:
             return __data__[key]
+
+    @staticmethod
+    def sudo_commands() -> list[str]:
+        """Returns a list of all sudo commands available."""
+        return sudo_cmds
 
     def update_bot_menu(self):
         dictionary = Stark.data("command_descriptions")
@@ -276,3 +281,10 @@ class Stark(Client, Mechanism):
                 lang_code='en',
             )
         )
+
+    @staticmethod
+    def _load_sql_model(name: str):
+        tables = [Users, Bans]
+        for t in tables:
+            if t.__tablename__ == name:
+                t.__table__.create(checkfirst=True)

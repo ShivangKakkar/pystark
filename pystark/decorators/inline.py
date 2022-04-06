@@ -29,6 +29,7 @@ class Inline(OnInlineQuery):
         query: Union[str, List[str]] = None,
         startswith: bool = False,
         owner_only: bool = False,
+        sudo_only: bool = False,
         group: int = 0,
         filters=None,
         # description: str = None,
@@ -41,26 +42,23 @@ class Inline(OnInlineQuery):
     ):
         """This decorator is used to handle inline queries. All arguments are optional.
 
-        `Parameters`:
-            query (`str` | List of `str`, optional) -
-                Query on which your function is called. Pass a list to handle multiple queries. Defaults to None, to handle all queries if your function handles all or if you are using other 'filters'
+        Parameters:
 
-            startswith (`bool`, optional) -
-                Set to True if you want your function to handle all queries starting with the 'query' string passed. Defaults to False.
+            query (str | list[str], optional): Query on which your function is called. Pass a list to handle multiple queries. Defaults to None, to handle all queries if your function handles all or if you are using other 'filters'
 
-            owner_only (`bool`, optional) -
-                Allow only owner to use this command. Defaults to False.
+            startswith (bool, optional): Set to True if you want your function to handle all queries starting with the 'query' string passed. Defaults to False.
 
-            group (`int`, optional) -
-                Define a group for this handler. Defaults to 0. `Read More <https://docs.pyrogram.org/topics/more-on-updates#handler-groups>`_
+            owner_only (bool, optional): Allow only owner to use this command. Defaults to False.
 
-            filters (optional) -
-                Extra filters to apply in your function. Import ``filters`` from pyrogram or pystark to use this. See example below.
+            sudo_only (bool, optional): Allow only sudos to use this command. Includes owner as sudo automatically. Defaults to False.
 
-        **Examples**
+            group (int, optional): Define a group for this handler. Defaults to 0. [Read More](https://docs.pyrogram.org/topics/more-on-updates#handler-groups)
 
-        .. code-block:: python
+            filters (pyrogram.filters, optional): Extra filters to apply in your function. Import ``filters`` from pyrogram or pystark to use this. See example below.
 
+        Examples:
+
+            ```python
             from pystark import Stark
 
             # The normal and easiest way.
@@ -74,6 +72,10 @@ class Inline(OnInlineQuery):
             # Function will only be triggered if owner searches 'hello', that is, the user whose id is set as OWNER_ID in environment variables.
             # Others will be ignored.
             @Stark.inline('hello', owner_only=True)
+
+            # Function will only be triggered if sudo users or owner searches 'hello', that is, users set as SUDO_USERS or OWNER_ID in environment variables.
+            # Others will be ignored.
+            @Stark.inline('hello', sudo_only=True)
 
             # Filter/Handle all queries.
 
@@ -112,6 +114,7 @@ class Inline(OnInlineQuery):
             @Stark.inline(filters=~filters.chat('StarkBotsChat') & filters.regex('hello'))
             # or
             @Stark.inline(filters=filters.regex('hello') & ~filters.chat('StarkBotsChat'))
+            ```
         """
         # ToDo:
         #   case_sensitive argument
@@ -132,7 +135,11 @@ class Inline(OnInlineQuery):
             filters_ = cmd_filter & filters
         else:
             filters_ = cmd_filter
-        if owner_only:
+        if sudo_only:
+            filters_ = filters_ & f.user(ENV().SUDO_USERS+ENV().OWNER_ID)
+        elif owner_only:
             filters_ = filters_ & f.user(ENV.OWNER_ID)
         decorator = OnInlineQuery.on_inline_query(filters_, group)
         return decorator
+
+    il = inline  # alias

@@ -1,8 +1,0 @@
-{%- extends "sphinx_rtd_theme/layout.html" %}
-{%- block htmltitle %}
-{%- if title|striptags|e == '&lt;no title&gt;' %}
-    <title>Not Found{{ titlesuffix }}</title>
-{%- else %}
-    <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
-{%- endif %}
-{%- endblock -%}

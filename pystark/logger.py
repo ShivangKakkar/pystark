@@ -31,7 +31,9 @@ class Formatter(logging.Formatter):
     def formatTime(self, record, datefmt):
         date = datetime.datetime.fromtimestamp(record.created, tz=pytz.UTC)
         try:
-            timezone = os.environ.get("TIMEZONE", "Asia/Kolkata")
+            timezone = os.environ.get("TIMEZONE")
+            if not timezone:
+                timezone = "Asia/Kolkata"
             date = date.astimezone(pytz.timezone(timezone))
         except UnknownTimeZoneError:
             print("WARNING - The timezone you filled doesn't exist. Please correct it. Till then, Indian timezone (Asia/Kolkata) will be used.")

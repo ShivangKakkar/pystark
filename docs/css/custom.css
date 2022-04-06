@@ -1,0 +1,42 @@
+a.home-button-custom {
+    padding: 0.75rem 1.5rem;
+    padding-top: 0.75rem;
+    display: inline-block;
+    color: #fcfcfc;
+    background-color: #3091d1;
+    font-size: 1.25rem;
+    border-radius: 32px;
+}
+
+a.home-button-custom:hover {
+    color: #fcfcfc;
+}
+
+.center-custom {
+    height: 465px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 48px;
+    letter-spacing: 0px;
+    font-family: "Source Sans Pro";
+}
+
+.center-custom h1, .center-custom h2{
+    padding: 0;
+    margin: 0;
+}
+
+div.autodoc-docstring {
+  padding-left: 20px;
+  margin-bottom: 30px;
+  border-left: 5px solid rgba(230, 230, 230);
+}
+
+div.autodoc-members {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}

@@ -1,0 +1,74 @@
+site_name: PyStark
+site_description: Haha
+site_author: StarkProgrammer
+repo_name: starkbotsindustries/pystark
+repo_url: https://github.com/StarkBotsIndustries/pystark
+edit_uri: ""
+copyright: Copyright &copy; 2022, <a href='http://github.com/StarkBotsIndustries' target='_blank'>Stark Programmer</a>
+
+theme:
+  name: 'material'
+  custom_dir: docs/overrides
+  favicon: images/favicon.ico
+  logo: images/pystark.png
+  features:
+    - content.code.annotate
+    - navigation.tabs
+    - navigation.top
+
+nav:
+  - Home: index.md
+  - Introduction:
+    - introduction/quickstart.md
+    - introduction/install.md
+  - Getting Started:
+    - start/boilerplate.md
+    - start/variables.md
+    - start/customization.md
+    - start/settings.md
+    - start/plugins.md
+    - start/running-bot.md
+  - Topics:
+    - topics/using-databases.md
+    - topics/telegram-as-database.md
+    - topics/tinydb.md
+    - topics/postgres.md
+    - topics/bot-menu.md
+    - topics/class-stark.md
+  - Decorators:
+    - decorators/index.md
+    - decorators/command.md
+    - decorators/callback.md
+    - decorators/inline.md
+  - FAQ: faqs.md
+  - Changelog:
+    - changelog.md
+    - older-releases.md
+
+markdown_extensions:
+  - codehilite:
+      css_class: highlight
+  - admonition
+  - meta
+  - pymdownx.highlight
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          rendering:
+            show_source: false
+
+extra_css:
+  - css/custom.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/StarkBotsIndustries
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/pystark/
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/StarkBots

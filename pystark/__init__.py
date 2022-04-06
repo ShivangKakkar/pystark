@@ -19,11 +19,6 @@
 
 from .client import Stark
 from .methods import Message
-# from .logger import logger
 from pyrogram import filters
-from .constants import (
-    __version__,
-    __description__,
-    __license__,
-    __copyright__
-)
+from . import settings as default_settings
+from .config import ENV

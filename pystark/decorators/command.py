@@ -17,21 +17,24 @@
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
 
+from ..config import settings, ENV
+from typing import Union
 from pyrogram import filters as f
-from ..config import ENV
 from pyrogram.methods.decorators.on_message import OnMessage
 
 
 command_data = {"commands": 0, "commands_list": [], "command_descriptions": {}}
+sudo_cmds = []
 
 
 class Command(OnMessage):
     @staticmethod
     def command(
-        cmd: str = None,
+        cmd: Union[str, list[str]] = None,
         description: str = None,
         group: int = 0,
         owner_only: bool = False,
+        sudo_only: bool = False,
         private_only: bool = False,
         group_only: bool = False,
         channel_only: bool = False,
@@ -40,35 +43,29 @@ class Command(OnMessage):
         """This decorator is used to handle messages. Mainly used to create commands. All arguments are  optional.
         You can also use the alias ``Stark.cmd`` instead of ``Stark.command``.
 
-        `Parameters`:
-            cmd (`str`, optional) -
-                Command that triggers your function. Defaults to None, if you only want to use extra_filters argument.
+        Parameters:
 
-            description (`str`,  optional) -
-                Command description to create Bot Menu. Defaults to None. :doc:`Read More </topics/bot-menu>`
+            cmd (str | list[str], optional): Command(s) that triggers your function. Defaults to None, which is helpful you only want to use extra_filters argument.
 
-            group (`int`, optional) -
-                Define a group for this handler. Defaults to 0. `Read More <https://docs.pyrogram.org/topics/more-on-updates#handler-groups>`_
+            description (str,  optional): Command description to create Bot Menu. Defaults to None. [Read More](/topics/bot-menu)
 
-            owner_only (`bool`, optional) -
-                Allow only owner to use this command. Defaults to False.
+            group (int, optional): Define a group for this handler. Defaults to 0. [Read More](https://docs.pyrogram.org/topics/more-on-updates#handler-groups)
 
-            private_only (`bool`, optional) -
-                Only handle messages for private chats. Bot will ignore messages in groups and channels. Defaults to False.
+            owner_only (bool, optional): Allow only owner to use this command. Defaults to False.
 
-            group_only (`bool`, optional) -
-                Only handle messages for groups. Bot will ignore messages in private chats and channels. Defaults to False.
+            sudo_only (bool, optional): Allow only sudos to use this command. Includes owner as sudo automatically. Defaults to False.
 
-            channel_only (`bool`, optional) -
-                Only handle messages for channels. Bot will ignore messages in private chats and groups. Defaults to False.
+            private_only (bool, optional): Only handle messages for private chats. Bot will ignore messages in groups and channels. Defaults to False.
 
-            extra_filters (optional) -
-                Extra filters to apply in your function. Import ``filters`` from pyrogram or pystark to use this. See example below.
+            group_only (bool, optional): Only handle messages for groups. Bot will ignore messages in private chats and channels. Defaults to False.
 
-        **Examples**
+            channel_only (bool, optional): Only handle messages for channels. Bot will ignore messages in private chats and groups. Defaults to False.
 
-        .. code-block:: python
+            extra_filters (pyrogram.filters, optional): Extra filters to apply in your function. Import ``filters`` from pyrogram or pystark to use this. See example below.
 
+        Examples:
+
+            ```python
             from pystark import Stark
 
             # The normal way. Bot will reply to command ``/greet`` sent anywhere and by anyone.
@@ -80,6 +77,10 @@ class Command(OnMessage):
             # Bot will reply only to owner, that is, the user whose id is set as OWNER_ID in environment variables.
             # Others will be ignored.
             @Stark.command('greet', owner_only=True)
+
+            # Bot will reply only to sudo users or owner, that is, users set as SUDO_USERS or OWNER_ID in environment variables.
+            # Others will be ignored.
+            @Stark.command('greet', sudo_only=True)
 
             # Bot will reply only if message is sent in private chat (aka pm).
             # Messages in groups and channels will be ignored.
@@ -134,22 +135,32 @@ class Command(OnMessage):
 
             # Filter either media messages or text messages.
             @Stark.command(extra_filters=filters.text | filters.media)
+            ```
         """
+        if isinstance(cmd, str):
+            cmd = [cmd]
+        if owner_only:
+            global sudo_cmds
+            sudo_cmds += cmd
+        prefixes = settings().CMD_PREFIXES
         if not cmd and not extra_filters:
             filters_ = f.all
         elif cmd and extra_filters:
-            command_data["commands"] += 1
-            command_data["commands_list"].append(cmd)
-            filters_ = f.command(cmd, prefixes=ENV.CMD_PREFIXES) & extra_filters
+            command_data["commands"] += len(cmd)
+            command_data["commands_list"] += cmd
+            filters_ = f.command(cmd, prefixes=prefixes) & extra_filters
         elif extra_filters:
             filters_ = extra_filters
         else:
-            command_data["commands"] += 1
-            command_data["commands_list"].append(cmd)
-            filters_ = f.command(cmd, prefixes=ENV.CMD_PREFIXES)
+            command_data["commands"] += len(cmd)
+            command_data["commands_list"] += cmd
+            filters_ = f.command(cmd, prefixes=prefixes)
         if cmd and description:
-            command_data["command_descriptions"][cmd] = description
-        if owner_only:
+            for c in cmd:
+                command_data["command_descriptions"][c] = description
+        if sudo_only:
+            filters_ = filters_ & f.user(ENV().SUDO_USERS+ENV().OWNER_ID)
+        elif owner_only:
             filters_ = filters_ & f.user(ENV().OWNER_ID)
         if private_only:
             filters_ = filters_ & f.private
@@ -160,4 +171,4 @@ class Command(OnMessage):
         decorator = OnMessage.on_message(filters_, group)
         return decorator
 
-    cmd = command
+    cmd = command  # alias

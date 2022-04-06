@@ -7,6 +7,7 @@
 
 # Python
 __pycache__/
+frozen-requirements.txt
 
 # Virtual Env
 venv/
@@ -21,10 +22,11 @@ MANIFEST
 tests/
 /test.py
 /*.env
-.log
 /info.txt
 examples/
 
 # Docs
-docs/_build
-docs/source/_local
+#old_docs/_build
+#old_docs/source/_local
+/old_docs/
+site/
