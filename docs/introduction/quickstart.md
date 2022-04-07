@@ -2,8 +2,8 @@
 
 Following these steps will allow you to see **PyStark** in action as quickly as possible.
 
-!!! note
-    Installation of Python with version 3.6 or above is required.
+!!! important
+    Installation of Python with version 3.9 or above is required!
 
 ---
 

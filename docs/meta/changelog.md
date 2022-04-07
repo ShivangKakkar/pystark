@@ -1,11 +1,19 @@
-# Changelog
+# ChangeLog
 
-Latest Version: v1.0.1
+Latest Version: `v1.0.2`
+
+---
+
+<a name="v1.0.2"></a>
+### v1.0.2 <small>- April 7, 2022</small>
+
+- Specify minimum python version which is `3.9`, in docs and pypi.
+- More user-friendly boilerplate.
 
 ---
 
 <a name="v1.0.1"></a>
-### v1.0.0 <small>- April 6, 2022</small>
+### v1.0.1 <small>- April 7, 2022</small>
 
 - Fix broken CLI due to bad imports.
 - Add `dev-requirement.txt` for docs and pypi
