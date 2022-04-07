@@ -1,7 +1,16 @@
 # Changelog
 
-Latest Version of PyStark is v1.0.0
+Latest Version: v1.0.1
 
+---
+
+<a name="v1.0.1"></a>
+### v1.0.0 <small>- April 6, 2022</small>
+
+- Fix broken CLI due to bad imports.
+- Add `dev-requirement.txt` for docs and pypi
+
+---
 
 <a name="v1.0.0"></a>
 ### v1.0.0 <small>- April 6, 2022</small>
