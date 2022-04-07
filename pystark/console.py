@@ -20,7 +20,7 @@
 import os
 import sys
 import argparse
-from pystark import __description__, __version__
+from pystark.constants import __description__, __version__
 
 
 def main():
