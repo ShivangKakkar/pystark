@@ -17,15 +17,21 @@
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
 from pystark import Stark
-from pyrogram.types import InlineKeyboardMarkup
-from pystark.plugins.helpers import replace, send_buttons, module
 from pystark.plugins.stark import HOME_BUTTON
+from pyrogram.types import InlineKeyboardMarkup
+from pystark.plugins.helpers import replace, send_buttons, module, LOADED_BUT_EMPTY, replace_commands
 
 
 @Stark.cmd('help', description="How to use the bot?", private_only=True)
-async def help_func(bot, msg):
+async def help_func(bot: Stark, msg):
     try:
-        text = await replace(module.HELP, msg, bot)
+        if not module.HELP:
+            Stark.log(LOADED_BUT_EMPTY.format("help", "help"), "warn")
+            return
+        text = str(module.HELP)
+        if "{commands}" in text:
+            text = await replace_commands(bot, text)
+        text = await replace(text, msg, bot)
         if await send_buttons():
             await msg.react(text, reply_markup=InlineKeyboardMarkup(HOME_BUTTON))
         else:

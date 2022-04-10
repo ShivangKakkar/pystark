@@ -5,12 +5,6 @@ By following this guide, you will have a basic understanding of how to use them.
 
 ---
 
-## TinyDB
-
-TinyDB is a simple database which does not require a Database URL and is very simple. If you are a beginner, it is for you. [Read How to Use It](/topics/tinydb).
-
----
-
 ## PostgreSQL (using sqlalchemy)
 
 - **Database URL** - You need to add ``DATABASE_URL`` to ``.env``. If you are using Heroku boilerplate, leave it to **Heroku** and **pystark**. Otherwise, you can get a Database URL from [ElephantSQL](http://www.elephantsql.com)
@@ -50,8 +44,8 @@ Users.__table__.create(checkfirst=True)
 
 - **Querying Tables** - You can query tables using ``Session`` object or the in-built pystark functions.
 
-    - [Using Session object](/topics/postgres#session-object)
-    - [Using in-built functions](/topics/postgres#default-functions)
+    - [Using Session object](/databases/postgres#session-object)
+    - [Using in-built functions](/databases/postgres#default-functions)
 
 ---
 
@@ -59,7 +53,13 @@ Users.__table__.create(checkfirst=True)
 
 You can use Telegram as a Database, thanks to [this project](https://pypi.org/project/TelegramDB/).
 
-**But How?** - [Read Documentation Here](/topics/telegram-as-database)
+**But How?** - [Read Documentation Here](/databases/telegram-as-database)
+
+---
+
+## TinyDB
+
+TinyDB is a simple database which does not require a Database URL and is very simple. If you are a beginner, it is for you. [Read How to Use It](/databases/tinydb).
 
 ---
 

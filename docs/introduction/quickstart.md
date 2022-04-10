@@ -47,7 +47,7 @@ The above steps will help you set up your bot and run it. You can use the comman
 
 Your bot now has four default commands:
 
-- `/start` - Start the bot.
+- `/start` - Start the bot (also works in groups)
 - `/help` - See a help message for the bot.
 - `/about` - About the bot.
 - `/id` - Get Telegram ID (also works in groups)

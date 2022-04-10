@@ -9,7 +9,6 @@ PyStark needs some special keys as environment variables to run your bot. This s
 - `API_ID`
 - `API_HASH`
 - `BOT_TOKEN`
-- `OWNER_ID`
 
 ---
 
@@ -29,14 +28,6 @@ It should be filled as `BOT_TOKEN`
 
 ---
 
-## Owner ID
-
-Your Telegram ID (or Username). Get it using [Identity Bot](https://t.me/TheIdentityBot) or [Rose](https://t.me/MissRose_bot)
-
-It should be filled as `OWNER_ID`.
-
----
-
 ## Filling the Variables
 
 - **For Local Deploy** - fill them in `.env` file.
@@ -48,6 +39,8 @@ It should be filled as `OWNER_ID`.
 ## Non-mandatory Variables
 
 - `SUDO_USERS` - User IDs (or Usernames) of users that can use `sudo_only` commands, buttons, inline searches. Specify multiple users by adding spaces.
+- `LOG_CHAT` - Username or ID of telegram group/channel for logging to telegram using [`Stark.log_tg`][pystark.client.Stark.log_tg] method.
+- `OWNER_ID` - Your Telegram ID (or Username). Get it using [Identity Bot](https://t.me/TheIdentityBot) or [Rose](https://t.me/MissRose_bot)
 
 ---
 

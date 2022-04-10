@@ -1,3 +1,22 @@
+# PyStark - Python add-on extension to Pyrogram
+# Copyright (C) 2021-2022 Stark Bots <https://github.com/StarkBotsIndustries>
+#
+# This file is part of PyStark.
+#
+# PyStark is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# PyStark is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with PyStark. If not, see <https://www.gnu.org/licenses/>.
+
+
 # Default Configuration for your project
 
 
@@ -14,14 +33,14 @@ CMD_PREFIXES = ["/"]
 
 # The addons (default plugins) you want to load from pystark
 ADDONS = [
-    "start",  # /start command which replies with text in START variable. Only private chats
+    "start",  # /start command which replies with text in START variable and START_IN_GROUPS variables for groups.
     "help",  # /help command which replies with text in HELP variable. Only private chats
     "about",  # /about command which replies with text in ABOUT variable. Only private chats
     "id",  # /id command which replies with user id and chat id.
     # "sudo",  # Use /sudo to show all sudo commands.
     # "json",  # /json command to get Message JSON and /jsondoc command to get Message JSON as document. Only owner can use them.
     # "must_join",  # Put usernames or chat ids where users must join in MUST_JOIN variable.
-    # "bans",  # Use /ban to ban people from using the bot. /unban to unban. /banlist to see banned users. Needs postgresql database with table "bans"
+    # "bans",  # Use /botban to ban people from using the bot. /botunban to unban. /botbanlist to see banned users. Needs postgresql database with table "bans"
     # "broadcast",  # Use /broadcast to broadcast a message to users. Needs postgresql database with table "users"
     # "stats",  # Use /stats to get current user stats. Needs postgresql database with table "users"
 ]
@@ -29,14 +48,11 @@ ADDONS = [
 # Start Message. Message sent at /start command. Only needed if `start` addon is enabled
 START = "Thank you for starting this bot."
 
-# Help Message. Message sent at /help command. Only needed if `help` addon is enabled
+# Help Message. Message sent at /help command. Only needed if `help` addon is enabled. {commands} is automatically replaced with commands if used.
 HELP = """
-Available Commands
+Available Commands are:
 
-/start - Start the bot
-/help - Show this message
-/about - About the bot
-/id - Get Telegram ID
+{commands}
 """
 
 # About Message. Message sent at /about command. Only needed if `about` addon is enabled
@@ -54,6 +70,14 @@ DATABASE_TABLES = [
     # "bans",  # Needed for "bans" addon
 ]
 
-STARKBOTS = False
+# Directory with localization files. This is useful:
+#   - if you want your bot to be in multiple languages
+#                      or
+#   - if you want to keep strings separately.
+# Files should have `yaml`, `yml` or `json` extension and should be in YAML or JSON Notations.
+# If "english" or "en" file exists in localization directory, it's considered default. Otherwise, the first file alphabetically.
+# This is optimized to not slow the bot.
+LOCALIZATION = "" or None
 
-# START_IN_GROUPS = "Hey :) PM me if you have any questions on how to use me."
+# Start Message for groups. Leave Empty ("") to remove.
+START_IN_GROUPS = "Hey :) Ping me privately if you have any questions on how to use me."

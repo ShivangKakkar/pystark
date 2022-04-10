@@ -17,12 +17,6 @@
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
 
-from pyrogram.methods import Methods
-from .command import Command
-from .inline import Inline
-from .callback import Callback
-from .admins import Admins
-
-
-class Mechanism(Methods, Command, Inline, Callback, Admins):
-    pass
+from .patch import patch
+from .process import exec_sync, exec_async
+from .localization import get_all_langs, l10n_setup, l10n

@@ -10,12 +10,12 @@
 
 ### v0.2.11 <small>- January 22, 2022</small>
 
-- Use TinyDB for your project. [Read More About It](/topics/tinydb).
+- Use TinyDB for your project. [Read More About It](/databases/tinydb).
 
 
 ### v0.2.10 <small>- January 22, 2022</small>
 
-- Use Telegram as a Database. [Read More About It](/topics/telegram-as-database).
+- Use Telegram as a Database. [Read More About It](/databases/telegram-as-database).
 
 
 ### v0.2.9 <small>- January 21, 2022</small>
@@ -38,14 +38,14 @@
 
 ### v0.2.6 <small>- January 20, 2022</small>
 
-- Added two new static methods to ``Stark`` class - [Stark.list_args][pystark.client.Stark.list_args] and [Stark.data()][pystark.client.Stark.data]
+- Added two new static methods to ``Stark`` class - `Stark.list_args` and `Stark.data()`
 - Improved ``Stark.log()`` function. Now pass int values for levels. See [Stark.log][pystark.client.Stark.log]
-- Added docs for class ``Stark`` - [Read Here](/topics/class-stark)
+- Added docs for class ``Stark`` - [Read Here](/classes/stark)
 
 
 ### v0.2.5 <small>- January 20, 2022</small>
 
-- Added in-built functions to query postgres tables - [Read More](/topics/postgres#default-functions)
+- Added in-built functions to query postgres tables - [Read More](/databases/postgres#default-functions)
 - Added ChangeLog to docs (this webpage)
 - Improve documentation using sphinx-toolbox
 

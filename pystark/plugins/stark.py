@@ -35,10 +35,7 @@ HELP = """
 
 ✨ **Available Commands** ✨
 
-/about - About The Bot
-/help - This Message
-/start - Start the Bot
-/id - Get your ID
+{commands}
 """
 
 ABOUT = """

@@ -20,12 +20,10 @@ from pystark import Stark, Message
 
 
 @Stark.cmd("sudo", owner_only=True)
-async def sudo(_, msg: Message):
-    sudo_cmds = Stark.sudo_commands()
-    # text = "No sudo commands available"
+async def sudo(bot: Stark, msg: Message):
     text = "Sudo Commands Available: \n"
     num = 0
-    for i in sudo_cmds:
+    for i in bot.sudo_commands:
         num += 1
         text += f"\n{num}) /{i}"
     await msg.react(text)

@@ -17,13 +17,14 @@
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
 from pystark import Stark
-from pyrogram.types import InlineKeyboardMarkup, CallbackQuery
-from pystark.plugins.helpers import replace, module
 from pystark.plugins.stark import HOME_BUTTON, MAIN_BUTTONS
+from pyrogram.types import InlineKeyboardMarkup, CallbackQuery
+from pystark.plugins.helpers import replace, module, replace_commands
 
 
 @Stark.callback(query=['home', 'about', 'help'])
 async def basic_cb(bot: Stark, cb: CallbackQuery):
+    # No Warns Cuz Personalized
     chat_id = cb.from_user.id
     message_id = cb.message.message_id
     if cb.data == 'home':
@@ -33,7 +34,10 @@ async def basic_cb(bot: Stark, cb: CallbackQuery):
         text = await replace(module.ABOUT, cb.message, bot)
         buttons = HOME_BUTTON
     else:
-        text = await replace(module.HELP, cb.message, bot)
+        text = str(module.HELP)
+        if "{commands}" in text:
+            text = await replace_commands(bot, text)
+        text = await replace(text, cb.message, bot)
         buttons = HOME_BUTTON
     await bot.edit_message_text(
         chat_id=chat_id,

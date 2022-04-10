@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
+from pystark import Stark
+from pystark.logger import logger
 from pystark.config import settings, ENV
 from pyrogram.errors import PeerIdInvalid
 from pystark.database.sql import Database
@@ -39,10 +41,12 @@ async def replace(m, msg, bot):
     if '{bot_mention}' in m:
         m = m.replace("{bot_mention}", (await bot.get_me()).mention)
     if '{owner}' in m:
-        try:
-            owner = (await bot.get_users(OWNER_ID[0])).mention
-        except PeerIdInvalid:
-            owner = '@StarkBots'
+        owner = '@pystark'
+        if OWNER_ID:
+            try:
+                owner = (await bot.get_users(OWNER_ID[0])).mention
+            except PeerIdInvalid:
+                logger.warn(f"Can't interact with bot owner [user={OWNER_ID[0]}]. Please send a message to bot.")
         m = m.replace("{owner}", owner)
     return m
 
@@ -51,8 +55,42 @@ async def replace(m, msg, bot):
 
 
 async def send_buttons():
-    if 'BUTTONS' in module.__dict__ and module.BUTTONS:
-        return True
-    if 'STARKBOTS' in module.__dict__ and module.STARKBOTS:
+    if module.NO_BUTTONS:
+        return False
+    if 'buttons' not in module.ADDONS and 'buttons.py' not in module.ADDONS:
+        return False
+    if module.STARKBOTS:
         return True
     return False
+
+
+LOADED_BUT_EMPTY = "You loaded '{}' addon but {} message is empty"
+
+cache_commands = ""
+
+
+async def replace_commands(bot: Stark, text: str):
+    global cache_commands
+    if cache_commands:
+        return cache_commands
+    basics = {"1": "", "2": "", "3": "", "4": ""}
+    others = []
+    cmds = bot.all_commands
+    for c in cmds:
+        if cmds[c]:
+            x = f"/{c} - {cmds[c]} \n"
+            if c == "start":
+                basics["1"] = x
+            elif c == "help":
+                basics["2"] = x
+            elif c == "about":
+                basics["3"] = x
+            elif c == "id":
+                basics["4"] = x
+            else:
+                others.append(x)
+    basics_str = basics["1"] + basics["2"] + basics["3"] + basics["4"]
+    others_str = "".join(others)
+    text = text.replace("{commands}", others_str+basics_str)
+    cache_commands = text
+    return text

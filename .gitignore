@@ -30,3 +30,7 @@ examples/
 #old_docs/source/_local
 /old_docs/
 site/
+
+# Temp
+pystark/helpers/requests.py
+requests.md

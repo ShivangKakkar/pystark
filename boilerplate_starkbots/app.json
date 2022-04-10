@@ -42,15 +42,15 @@
       "required": true,
       "value": ""
     },
+    "LOG_CHAT": {
+      "description": "Telegram Chat ID for logging purposes",
+      "required": true,
+      "value": ""
+    },
     "OWNER_ID": {
       "description": "Your Telegram ID",
       "required": false,
       "value": ""
-    },
-    "TIMEZONE": {
-      "description": "Don't change if you are from India",
-      "required": false,
-      "value": "Asia/Kolkata"
     }
   }
 }

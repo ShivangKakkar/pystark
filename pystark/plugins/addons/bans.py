@@ -22,7 +22,7 @@ from pystark.plugins.helpers import db
 from pyrogram.errors import PeerIdInvalid
 
 
-@Stark.cmd("ban", owner_only=True)
+@Stark.cmd("botban", owner_only=True)
 async def ban_users(bot: Stark, msg):
     if len(msg.command) == 1:
         user_id = None
@@ -39,7 +39,7 @@ async def ban_users(bot: Stark, msg):
                 reason = reason.reply_to_message.link
             except AttributeError:
                 reason = None
-            await db.set("bans", user_id, {"user_id": user_id, "reason": reason})
+            await db.set("bans", user_id, {"reason": reason})
             await msg.reply(f"Banned `{user_id}`")
     else:
         user_id = msg.command[1]
@@ -54,11 +54,11 @@ async def ban_users(bot: Stark, msg):
                 await msg.reply(f"Seriously banned.", quote=True)
                 await msg.reply(f"I'm not kidding.", quote=True)
                 return
-            await db.set("bans", user_id, {"user_id": user_id, "reason": None})
+            await db.set("bans", user_id, {"reason": None})
             await msg.reply(f"Banned `{user_id}`", quote=True)
 
 
-@Stark.cmd("unban", owner_only=True)
+@Stark.cmd("botunban", owner_only=True)
 async def unban_users(_, msg):
     if len(msg.command) == 1:
         await msg.reply("Please pass a user id or username", quote=True)
@@ -77,7 +77,7 @@ async def unban_users(_, msg):
                 await msg.reply("Wasn't banned...", quote=True)
 
 
-@Stark.cmd("banlist", owner_only=True)
+@Stark.cmd("botbanlist", owner_only=True)
 async def ban_list(bot: Stark, msg):
     number = 0
     banned = await db.get_all_data("bans")

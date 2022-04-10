@@ -17,17 +17,20 @@
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
 import sqlalchemy
-from pystark.logger import logger
-from typing import Optional
-from sqlalchemy import create_engine
+from ..config import ENV
 from sqlalchemy import inspect
+from pystark.logger import logger
+from typing import Optional, Union
+from pystark.config import settings
+from sqlalchemy import create_engine
+from sqlalchemy.exc import ProgrammingError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
-from ..config import ENV
-from sqlalchemy.exc import ProgrammingError
 
 
+# Needs to be outside the class so that models can exist without database
 Base = declarative_base()
+__checked__ = False
 
 
 class Database:
@@ -45,18 +48,27 @@ class Database:
         if not self.url:
             logger.critical('No DATABASE_URL defined. Exiting...')
             raise SystemExit
+        module = settings()
         self.base = Base
         engine = create_engine(ENV.DATABASE_URL)
         Base.metadata.bind = engine
-        Base.metadata.create_all(engine)
+        global __checked__
+        if not __checked__:
+            specified_tables = module.DATABASE_TABLES
+            actual_tables = Base.metadata.tables
+            all_tables = ["bans", "users"]
+            for t in all_tables:
+                if t not in specified_tables and t in actual_tables:
+                    Base.metadata.remove(actual_tables[t])
+            __checked__ = True
+        Base.metadata.create_all(bind=engine, checkfirst=True)
         Session = scoped_session(sessionmaker(bind=engine, autoflush=False))
         # Type-Hinting is wrong here, but a temporary way to get Hints for Session object as their methods are similar
         self.session: sqlalchemy.orm.Session = Session
         self.engine = Session.get_bind()
 
-    async def get(self, table_name: str, primary_key, key: str = None):
+    async def get(self, table_name: str, primary_key, key: Union[str] = "") -> Union[dict, None]:
         """Get data from postgres database using table name as string.
-        Returns dict if key_name is not passed.
 
         Parameters:
             table_name (``str``):
@@ -65,21 +77,31 @@ class Database:
             primary_key:
                 The value of a primary_key to query the table.
 
-            key (``str``, *optional*):
-                If passed, only value for the specified key is returned.
+            key:
+                If you only need one key.
+
+        Returns:
+            Key-value pairs if no key is passed. Value of the key if key is passed. None if no such row.
+
+        Raises:
+            TableNotFound- If table is not found
         """
-        tables_dict = await self._tables_dict()
-        table_exists = await self.table_exists(table_name)
-        if not table_exists:
+        tables_dict = await self.tables_dict()
+        if table_name not in tables_dict:
             raise TableNotFound(f'No such table exists : {table_name}')
         table = tables_dict[table_name]
         query = self.session.query(table).get(primary_key)
+        if not query:
+            return
+        all_val = await self._class_vars(query)
         if key:
-            return getattr(query, key)
-        return await self._class_vars(query)
+            return all_val.get(key)
+        return all_val
 
-    async def set(self, table_name: str, primary_key, data: dict):
+    async def set(self, table_name: str, primary_key, data: dict = None):
         """Set data in postgres database using table name as string. ``insert`` is an alias of ``set``
+
+        If `data` is not passed, `primary key` is added in a new row to table.
 
         Parameters:
             table_name (``str``):
@@ -94,9 +116,10 @@ class Database:
         Returns:
             ``bool``: True on success
         """
-        tables_dict = await self._tables_dict()
-        table_exists = await self.table_exists(table_name)
-        if not table_exists:
+        if data is None:
+            data = {}
+        tables_dict = await self.tables_dict()
+        if table_name not in tables_dict:
             raise TableNotFound(f'No such table exists : {table_name}')
         table = tables_dict[table_name]
         try:
@@ -121,9 +144,8 @@ class Database:
             table_name:
                 The table name to query on.
         """
-        tables_dict = await self._tables_dict()
-        table_exists = await self.table_exists(table_name)
-        if not table_exists:
+        tables_dict = await self.tables_dict()
+        if table_name not in tables_dict:
             raise TableNotFound(f'No such table exists : {table_name}')
         table = tables_dict[table_name]
         count = self.session.query(table).count()
@@ -138,9 +160,8 @@ class Database:
             table_name (``str``):
                 The table name to query on.
         """
-        tables_dict = await self._tables_dict()
-        table_exists = await self.table_exists(table_name)
-        if not table_exists:
+        tables_dict = await self.tables_dict()
+        if table_name not in tables_dict:
             raise TableNotFound(f'No such table exists : {table_name}')
         table = tables_dict[table_name]
         try:
@@ -172,9 +193,8 @@ class Database:
             primary_key:
                 The value of a primary_key to query the table.
         """
-        tables_dict = await self._tables_dict()
-        table_exists = await self.table_exists(table_name)
-        if not table_exists:
+        tables_dict = await self.tables_dict()
+        if table_name not in tables_dict:
             raise TableNotFound(f'No such table exists : {table_name}')
         table = tables_dict[table_name]
         try:
@@ -246,13 +266,13 @@ class Database:
         self.engine.execute('ALTER TABLE %s DROP COLUMN %s' % (table_name, column_name))
 
     async def columns(self, table_name: str) -> list[tuple[str]]:
-        """List of all column names in the database
+        """List of all public column names in the database
 
         Parameters:
             table_name (``str``):
                 Name of the table whose columns you need.
         """
-        return [getattr(x, "_fields") for x in self.engine.execute('SELECT * FROM %s' % table_name)]
+        return [x[0] for x in self.engine.execute("SELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '%s'" % table_name)]
 
     async def list_tables(self) -> list:
         """Returns list all tables in your database"""
@@ -260,21 +280,20 @@ class Database:
 
     async def has_table(self, table_name: str) -> bool:
         """Returns True if table exists else False. To also check if it's sqlalchemy model exists, use function ``table_exists`` instead"""
+        inspect(self.engine)
         return inspect(self.engine).has_table(table_name)
 
     async def table_exists(self, table_name: str) -> bool:
         """Returns True if table exists with sqlalchemy model else False. To check only for table, use function ``has_table`` instead"""
-        tables_dict = await self._tables_dict()
+        tables_dict = await self.tables_dict()
         if table_name in tables_dict:
             return True
         else:
             return False
 
-    # Private Functions
-    @staticmethod
-    async def _tables_dict() -> dict:
-        """Returns all {tablename: table}"""
-        return {table.__tablename__: table for table in Base.__subclasses__()}
+    async def tables_dict(self) -> dict:
+        """Returns all {tablename: table} where tablename is a string and table is a model (python class)"""
+        return {table.__tablename__: table for table in self.base.__subclasses__()}
 
     @staticmethod
     async def _class_vars(class_obj) -> dict:

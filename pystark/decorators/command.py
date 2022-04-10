@@ -17,14 +17,13 @@
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
 
-from ..config import settings, ENV
 from typing import Union
+from ..config import settings, ENV
 from pyrogram import filters as f
 from pyrogram.methods.decorators.on_message import OnMessage
 
 
-command_data = {"commands": 0, "commands_list": [], "command_descriptions": {}}
-sudo_cmds = []
+command_data = {"total_commands": 0, "all_commands": {}, "sudo_commands": []}
 
 
 class Command(OnMessage):
@@ -139,25 +138,28 @@ class Command(OnMessage):
         """
         if isinstance(cmd, str):
             cmd = [cmd]
-        if owner_only:
-            global sudo_cmds
-            sudo_cmds += cmd
+        if owner_only or sudo_only:
+            command_data["sudo_commands"] += cmd
         prefixes = settings().CMD_PREFIXES
         if not cmd and not extra_filters:
             filters_ = f.all
         elif cmd and extra_filters:
-            command_data["commands"] += len(cmd)
-            command_data["commands_list"] += cmd
+            for c in cmd:
+                if c not in command_data["all_commands"]:
+                    command_data["total_commands"] += 1
+                    command_data["all_commands"][c] = ""
             filters_ = f.command(cmd, prefixes=prefixes) & extra_filters
         elif extra_filters:
             filters_ = extra_filters
         else:
-            command_data["commands"] += len(cmd)
-            command_data["commands_list"] += cmd
+            for c in cmd:
+                if c not in command_data["all_commands"]:
+                    command_data["total_commands"] += 1
+                    command_data["all_commands"][c] = ""
             filters_ = f.command(cmd, prefixes=prefixes)
         if cmd and description:
             for c in cmd:
-                command_data["command_descriptions"][c] = description
+                command_data["all_commands"][c] = description
         if sudo_only:
             filters_ = filters_ & f.user(ENV().SUDO_USERS+ENV().OWNER_ID)
         elif owner_only:

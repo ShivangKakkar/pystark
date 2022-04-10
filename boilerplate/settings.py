@@ -15,14 +15,14 @@ CMD_PREFIXES = ["/"]
 
 # The addons (default plugins) you want to load from pystark
 ADDONS = [
-    "start",  # /start command which replies with text in START variable. Only private chats
+    "start",  # /start command which replies with text in START variable in private chats and START_IN_GROUPS variables for groups.
     "help",  # /help command which replies with text in HELP variable. Only private chats
     "about",  # /about command which replies with text in ABOUT variable. Only private chats
     "id",  # /id command which replies with user id and chat id.
     # "sudo",  # Use /sudo to show all sudo commands.
     # "json",  # /json command to get Message JSON and /jsondoc command to get Message JSON as document. Only owner can use them.
     # "must_join",  # Put usernames or chat ids where users must join in MUST_JOIN variable.
-    # "bans",  # Use /ban to ban people from using the bot. /unban to unban. /banlist to see banned users. Needs postgresql database with table "bans"
+    # "bans",  # Use /botban to ban people from using the bot. /botunban to unban. /botbanlist to see banned users. Needs postgresql database with table "bans"
     # "broadcast",  # Use /broadcast to broadcast a message to users. Needs postgresql database with table "users"
     # "stats",  # Use /stats to get current user stats. Needs postgresql database with table "users"
 ]
@@ -54,3 +54,7 @@ Available Commands
 
 # About Message. Message sent at /about command. Only needed if `about` addon is enabled
 ABOUT = "About This Awesome Bot \nDeveloped using @PyStark"
+
+# Start Message for groups. Leave Empty ("") to remove.
+# Remove below line completely to use the default one which is: "Hey :) Ping me privately if you have any questions on how to use me."
+START_IN_GROUPS = "Thank you for starting me in your group. PM for questions!"

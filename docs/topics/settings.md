@@ -9,11 +9,12 @@ All available options are:
 - [CMD_PREFIXES](#cmd_prefixes)
 - [ADDONS](#addons)
 - [START](#start_option)
+- [START_IN_GROUPS](#start_in_groups_option)
 - [HELP](#help_option)
 - [ABOUT](#about_option)
 - [MUST_JOIN](#must_join_option)
-- [TIMEZONE](#timezone)
 - [DATABASE_TABLES](#database_tables)
+- [TIMEZONE](#timezone)
 
 
 ## PLUGINS
@@ -84,13 +85,20 @@ CMD_PREFIXES = ["/", "!", "&"]
 
 ## ADDONS
 
+!!! tip
+
+    Addons are always loaded after your own plugins so you can always overwrite them. 
+
+    For Example, If you load "start" addon and also create a `/start` command yourself, bot will use your own command.
+
+
 PyStark comes with many ready-to-use plugins which can be directly added using `ADDONS` option.
 
 These are the available options:
 
 ### start
 
-Plugin with `/start` command which replies with text in [START](#start) option of `settings.py`. Only works in private chats.
+Plugin with `/start` command which replies with text in [START](#start) option of `settings.py` in private chats and text in [START_IN_GROUPS](#start_in_groups) option in groups.
 
 
 ### help
@@ -131,7 +139,7 @@ Force bot users to join particular chats to use the bot. Put usernames or chat i
 
     Needs postgresql database with table `bans`. See [DATABASE_TABLES](#database-tables) option.
     
-Plugin with `/ban` command to ban people from using the bot, `/unban` to unban, `/banlist` to list banned users.
+Plugin with `/botban` command to ban people from using the bot, `/botunban` to unban, `/botbanlist` to list banned users.
 
 ### broadcast
 
@@ -178,6 +186,33 @@ START = "Thank you for starting this bot."
 
 ---
 
+<a name="start_in_groups_option"></a>
+
+## START_IN_GROUPS
+
+To configure the START_IN_GROUPS message, i.e, the message sent at `/start` command in groups. Only needed if `start` addon is enabled. 
+
+If you want to set it same to `START` variable, then:
+
+```python
+START = "..."
+START_IN_GROUPS = START
+```
+
+If you want the bot to not reply, set it to empty string.
+
+```python
+START_IN_GROUPS = ""
+```
+
+Default Value:
+
+```python
+START_IN_GROUPS = "Thank you for starting me in your group. PM for questions!"
+```
+
+---
+
 <a name="help_option"></a>
 
 ## HELP
@@ -190,12 +225,15 @@ Default Value:
 HELP = """
 Available Commands
 
+{commands}
 /start - Start the bot
 /help - Show this message
 /about - About the bot
 /id - Get Telegram ID
 """
 ```
+
+{commands} is automatically replaced with your commands if default is used
 
 ---
 
@@ -229,24 +267,6 @@ Defaults to empty list, i.e, no chat.
 
 ```python
 MUST_JOIN = []
-```
-
----
-
-## TIMEZONE
-
-Timezone to use while logging. See full list of available timezones in [GitHub Gist](https://gist.github.com/StarkBotsIndustries/7a6210355f40052a71ba96032d4638df)
-
-For example:
-
-```python
-TIMEZONE = "America/New_York"
-```
-
-Defaults to India, i.e, `Asia/Kolkata`
-
-```python
-TIMEZONE = "Asia/Kolkata"
 ```
 
 ---
@@ -289,3 +309,19 @@ DATABASE_TABLES = []
 ```
 
 ---
+
+## TIMEZONE
+
+Timezone to use while logging. See full list of available timezones in [GitHub Gist](https://gist.github.com/StarkBotsIndustries/7a6210355f40052a71ba96032d4638df)
+
+For example:
+
+```python
+TIMEZONE = "America/New_York"
+```
+
+Defaults to India, i.e, `Asia/Kolkata`
+
+```python
+TIMEZONE = "Asia/Kolkata"
+```

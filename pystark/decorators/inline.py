@@ -16,10 +16,10 @@
 # You should have received a copy of the GNU General Public License
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
+from ..config import ENV
 from ..logger import logger
 from typing import Union, List
 from pyrogram import filters as f
-from ..config import ENV
 from pyrogram.methods.decorators.on_inline_query import OnInlineQuery
 
 

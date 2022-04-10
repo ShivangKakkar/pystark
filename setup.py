@@ -30,7 +30,7 @@ with open("pystark/constants.py", "r") as f:
     text = f.read()
     pat = r"['\"]([^'\"]+)['\"]"
     version = re.search("__version__ = "+pat, text).group(1)
-    beta_version = re.search("__beta_version__ = "+pat, text).group(1)
+    # beta_version = re.search("__beta_version__ = "+pat, text).group(1)
     description = re.search("__description__ = "+pat, text).group(1)
 
 

@@ -83,7 +83,8 @@ async def set_data():
     user_id = 500123456  # primary key
     key_to_change = "aim"
     new_value = "programmer"
-    await db.set("users", user_id, key_to_change, new_value)
+    # If row doesn't exist, it'll be auto added and committed.
+    await db.set("users", user_id, {"key_to_change": "new_value"})
     print("Set")
 ```
 

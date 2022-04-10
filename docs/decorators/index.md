@@ -5,7 +5,9 @@ Decorators are a very helpful tool in Python. They make functions easily reusabl
 
 ---
 
-These are the decorators of class Stark to handle messages and queries:
+These are the decorators of class Stark to handle messages, queries, etc.:
+
+<br>
 
 - **Stark.command** - Handle a certain type of messages like command messages. [Read More Here](/decorators/command)
 
@@ -16,3 +18,7 @@ These are the decorators of class Stark to handle messages and queries:
 <br>
 
 - **Stark.callback** - Handle callback queries (button clicks). [Read More Here](/decorators/callback)
+
+<br>
+
+- **Stark.admins** - Python decorator of class Stark to allow only admins to you some commands. [Read More Here](/decorators/admins)

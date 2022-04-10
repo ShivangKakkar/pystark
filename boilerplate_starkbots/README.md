@@ -1,21 +1,24 @@
-## [Sample Bot](https://t.me/SampleBot)
+## [#](https://t.me/#)
 
 > A star ⭐ from you means a lot to me !
 
-#### Telegram bot to 
+#### Telegram bot to #
 
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 ## Functions
 
-1. 
+1. # 
 2. 
+3. 
+4. 
+5. 
 
 ## Deployment
 
 ### Deploy to Heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/StarkBotsIndustries/)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/StarkBotsIndustries/#)
 
 1. Tap on above button and fill values for needed variables
 2. Then tap "Deploy App" below it. Wait till deploying is complete (will take atmost 2 minutes).
@@ -26,15 +29,15 @@
 
 1. Clone the repo
    ```markdown
-   git clone https://github.com/StarkBotsIndustries/
+   git clone https://github.com/StarkBotsIndustries/#
    ```
 2. Get a DATABASE_URL. If you don't know how, deploy using Heroku Button only or delete database things as it's not a compulsion.
    
-3. Edit `Config.py` and fill the needed variables
+3. Edit `settings.py` and as your needs, rename `.env.sample` to `.env` and fill with your variables.
 
 4. Enter the directory
    ```markdown
-   cd SampleBot
+   cd #
    ```
 5. Run the file
    ```markdown
@@ -59,6 +62,7 @@
 
 ## Credits
 
+- Me for [pystark](https://github.com/StarkBotsIndustries/pystark)
 - [Dan Tès](https://github.com/delivrance) for his [Pyrogram](https://docs.pyrogram.org) Library
 
 ## Support

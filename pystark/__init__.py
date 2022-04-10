@@ -17,8 +17,8 @@
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
 
+from .config import ENV
 from .client import Stark
 from .methods import Message
 from pyrogram import filters
 from . import settings as default_settings
-from .config import ENV

@@ -3,7 +3,7 @@
 Telegram has a feature to create a bot menu for your bot. It's usually created using BotFather. It looks like this:
 
 <div align="center">
-<img src="/images/bot_menu.jpg" width="300" alt="Bot Menu"/>
+<img src="../../images/bot_menu.jpg" width="300" alt="Bot Menu"/>
 </div>
 
 

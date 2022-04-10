@@ -17,19 +17,23 @@ Not convinced to use PyStark? Try it out first, using few small steps given in t
 - [Installation](/introduction/install) - Install pystark on your device.
 - [Boilerplate](/start/boilerplate) - Generate a boilerplate.
 - [Mandatory Variables](/start/variables) -  Set up the needed variables for bot.
-- [Customization](/start/customization) - Easily customize your bot.
-- [Project Settings](/start/settings) - Project settings.
-- [Creating Plugins](/start/plugins) - Code your own plugins
+- [Customization](/topics/customization) - Easily customize your bot.
+- [Project Settings](/topics/settings) - Project settings.
+- [Creating Plugins](/topics/plugins) - Code your own plugins
 - [Run Bot](/start/running-bot) - Run your bot locally.
-- [Using Databases](/topics/using-databases) - Use various databases with PyStark.
-- [Querying Postgres Database](/topics/postgres) - Use postgres with PyStark.
-- [Telegram as a Database](/topics/telegram-as-database) - Use Telegram as a Database with PyStark.
-- [TinyDB](/topics/tinydb) - Use TinyDB as project database with PyStark.
+- [Using Databases](/databases/index) - Use various databases with PyStark.
 - [Bot Menu](/topics/bot-menu) -  Set Bot Menu using PyStark.
-- [Class Stark](/topics/class-stark) -  The main class Stark.
+- [PyStark Helpers Package](/helpers/index) - Put-of-the-box usable helpers.
+- [Class Stark](/classes/stark) -  The main pystark class Stark which serves as a client.
+- [Class Message](/classes/message) -  The added methods to any message.
+- [Decorators](/decorators) - All available decorators in pystark.
 - [Command Decorator](/decorators/command) - The main decorator in pystark.
 - [Callback Decorator](/decorators/callback) - Handle callback queries.
 - [Inline Decorator](/decorators/inline) - Handle inline queries.
+- [Admins Decorator](/decorators/admins) - Handle inline queries.
+- [Querying Postgres Database](/databases/postgres) - Use postgres with PyStark.
+- [Telegram as a Database](/databases/telegram-as-database) - Use Telegram as a Database with PyStark.
+- [TinyDB](/databases/tinydb) - Use TinyDB as project database with PyStark.
 
 
 ## Easy mantra to use this documentation
@@ -39,5 +43,5 @@ Just tap on ``Next`` button below every page, keep reading while following the s
 
 ## Meta
 
-- [PyStark FAQs](meta/faqs) - Answer to common PyStark questions.
+- [PyStark FAQs](/meta/faqs) - Answer to common PyStark questions.
 - [ChangeLog](/meta/changelog) - ChangeLog for PyStark releases.

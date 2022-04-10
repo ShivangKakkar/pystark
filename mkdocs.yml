@@ -1,9 +1,10 @@
 site_name: PyStark
-site_description: The awesome python library to create Telegram Bots based on pyrogram. Updates available at https://t.me/pystark
+site_url: https://pystark.codes
 site_author: StarkProgrammer
+site_description: The awesome python library to create Telegram Bots based on pyrogram. Updates available at https://t.me/pystark
 repo_name: starkbotsindustries/pystark
 repo_url: https://github.com/StarkBotsIndustries/pystark
-edit_uri: ""
+#edit_uri: ""
 copyright: Copyright &copy; 2022, <a href='http://github.com/StarkBotsIndustries' target='_blank'>Stark Programmer</a>
 
 theme:
@@ -11,10 +12,39 @@ theme:
   custom_dir: docs/overrides
   favicon: images/favicon.ico
   logo: images/pystark.png
+  icon:
+    repo: fontawesome/brands/github
   features:
+    - announce.dismiss
+    - navigation.sections
     - content.code.annotate
-    - navigation.tabs
+    - navigation.indexes
+    - toc.follow
     - navigation.top
+    - navigation.tracking
+    - navigation.expand
+    - search.highlight
+    - search.share
+    - search.suggest
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      accent: black
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+#    - navigation.tabs
+#    - navigation.instant
+#    - navigation.tabs.sticky
+#    - toc.integrate
+#    - header.autohide
+#    - content.tabs.link
 
 nav:
   - Home: index.md
@@ -24,25 +54,36 @@ nav:
   - Getting Started:
     - start/boilerplate.md
     - start/variables.md
-    - start/customization.md
-    - start/settings.md
-    - start/plugins.md
     - start/running-bot.md
+    - start/examples.md
   - Topics:
-    - topics/using-databases.md
-    - topics/telegram-as-database.md
-    - topics/tinydb.md
-    - topics/postgres.md
+    - topics/settings.md
+    - topics/customization.md
+    - topics/plugins.md
     - topics/bot-menu.md
-    - topics/class-stark.md
+  - Classes:
+    - classes/stark.md
+    - classes/message.md
   - Decorators:
     - decorators/index.md
     - decorators/command.md
     - decorators/callback.md
     - decorators/inline.md
+    - decorators/admins.md
+  - Databases:
+    - databases/index.md
+    - Using Postgres: databases/postgres.md
+    - databases/telegram-as-database.md
+    - databases/tinydb.md
+  - Helpers:
+    - helpers/index.md
+    - helpers/patch.md
+    - helpers/process.md
+  - bots.md
   - FAQ: meta/faqs.md
-  - meta/changelog.md
-  - meta/older-releases.md
+  - ChangeLog:
+    - meta/changelog/index.md
+    - meta/older-releases.md
 
 markdown_extensions:
   - codehilite:

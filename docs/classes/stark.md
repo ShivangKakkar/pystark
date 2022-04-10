@@ -8,9 +8,15 @@ This is the main class of PyStark. This guide will explain the usage of importan
       selection:
           members:
             - activate
-            - run
+            - log_tg
             - list_args
+            - total_plugins
+            - all_plugins
+            - total_commands
+            - all_commands
+            - sudo_commands
             - log
             - data
+            - run
             - list_modules
             - load_modules

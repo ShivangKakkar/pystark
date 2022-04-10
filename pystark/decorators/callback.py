@@ -17,9 +17,9 @@
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
 
+from ..config import ENV
 from typing import Union
 from ..logger import logger
-from ..config import ENV
 from pyrogram import filters as f
 from pyrogram.methods.decorators.on_callback_query import OnCallbackQuery
 
