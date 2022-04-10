@@ -11,21 +11,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://pystark.codes/faqs/</loc>
-         <lastmod>2022-04-10</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://pystark.codes/older-releases/</loc>
-         <lastmod>2022-04-10</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://pystark.codes/changelog/</loc>
-         <lastmod>2022-04-10</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://pystark.codes/classes/message/</loc>
          <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
@@ -102,6 +87,21 @@
     </url>
     <url>
          <loc>https://pystark.codes/introduction/quickstart/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pystark.codes/meta/faqs/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pystark.codes/meta/older-releases/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pystark.codes/meta/changelog/</loc>
          <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
