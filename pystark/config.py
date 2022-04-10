@@ -60,8 +60,7 @@ def settings():
     prefixes = getattr(mod, "CMD_PREFIXES")
     if not isinstance(prefixes, list):
         setattr(mod, "CMD_PREFIXES", [prefixes])
-    if getattr(mod, "STARKBOTS"):
-
+    if getattr(mod, "STARKBOTS") or os.getenv("STARKBOTS", ""):
         # FULL_MESSAGES
         if "FULL_MESSAGES" not in mod.__dict__ or not getattr(mod, "FULL_MESSAGES"):
             # START
@@ -82,7 +81,8 @@ def settings():
                 .replace("{2}", (("\n\nSource Code : [Click Here](https://github.com/StarkBotsIndustries/"+rep+")") if rep else ""))
             )
         # MUST_JOIN
-        setattr(mod, "MUST_JOIN", ["StarkBots", "StarkBotsChat"])
+        if not getattr(mod, "MUST_JOIN") and ("special" in os.getenv("MUST_JOIN", "") or os.getenv("STARKBOTS", "")):
+            setattr(mod, "MUST_JOIN", ["StarkBots", "StarkBotsChat"])
 
         # ADDONS
         if "ADDONS" not in mod.__dict__:

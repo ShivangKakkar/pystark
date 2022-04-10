@@ -24,6 +24,7 @@ tests/
 /*.env
 /info.txt
 examples/
+features.txt
 
 # Docs
 #old_docs/_build
