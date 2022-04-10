@@ -81,6 +81,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://pystark.codes/helpers/stickers/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://pystark.codes/introduction/install/</loc>
          <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
