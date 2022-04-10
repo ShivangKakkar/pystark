@@ -80,7 +80,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'pystark = pystark.console:main',
+            'pystark = pystark.cli:main',
         ],
     },
 )

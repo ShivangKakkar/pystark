@@ -73,10 +73,11 @@ DATABASE_TABLES = [
 # Directory with localization files. This is useful:
 #   - if you want your bot to be in multiple languages
 #                      or
-#   - if you want to keep strings separately.
+#   - if you want to keep reply strings separately.
 # Files should have `yaml`, `yml` or `json` extension and should be in YAML or JSON Notations.
 # If "english" or "en" file exists in localization directory, it's considered default. Otherwise, the first file alphabetically.
 # This is optimized to not slow the bot.
+# If you don't want these feature, leave it empty ("")
 LOCALIZATION = "" or None
 
 # Start Message for groups. Leave Empty ("") to remove.

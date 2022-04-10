@@ -184,7 +184,7 @@ class ENV:
                 sudos.append(o)
         self.SUDO_USERS = sudos
 
-        if self.LOG_CHAT and "special" in self.LOG_CHAT and getattr(module, "STARKBOTS"):
+        if self.LOG_CHAT and ("special" in self.LOG_CHAT or os.getenv("STARKBOTS", "")) and getattr(module, "STARKBOTS"):
             self.LOG_CHAT = -1001567003949  # Stark Bots Logs
         try:
             self.LOG_CHAT = int(self.LOG_CHAT)

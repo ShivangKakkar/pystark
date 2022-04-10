@@ -33,7 +33,7 @@ from pystark.constants import __version__
 from inspect import getmembers, isfunction
 from pystark.plugins.models.bans import Bans
 from pystark.plugins.models.users import Users
-from pystark.helpers import l10n_setup, get_all_langs
+from pystark.helpers.localization import l10n_setup, get_all_langs
 from pystark.decorators.command import command_data
 from pyrogram.errors import ApiIdInvalid, AccessTokenInvalid, AuthKeyDuplicated, AuthKeyUnregistered, UserDeactivated
 

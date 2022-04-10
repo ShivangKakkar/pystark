@@ -18,11 +18,11 @@
 
 import os
 import asyncio
-from ..helpers import patch
-from pystark.helpers import l10n
 from typing import Optional, Union
+from pystark.helpers.patch import patch
 from pyrogram.types import Message, User
 from pyrogram.errors import MessageTooLong
+from pystark.helpers.localization import l10n
 
 
 @patch(Message)
