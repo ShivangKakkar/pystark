@@ -1,0 +1,16 @@
+<!--Taken from https://github.com/squidfunk/mkdocs-material/blob/master/material/overrides/partials/content.html-->
+
+{% if page.edit_url %}
+    {% if not page.edit_url.endswith('docs/index.md') %}  <!-- Don't add edit button on main webpage -->
+        {% set edit = "https://github.com/StarkBotsIndustries/pystark/edit" %}
+        <!-- {% set view = "https://raw.githubusercontent.com/StarkBotsIndustries/pystark" %} -->
+        <a target="_blank" href="{{ page.edit_url }}" title="{{ lang.t('edit.link.title') }}" class="md-content__button md-icon">
+            {% include ".icons/material/file-edit-outline.svg" %}
+        </a>
+        <!-- <a target="_blank" href="{{ page.edit_url | replace(edit, view) }}" title="View source of this page" class="md-content__button md-icon"> -->
+        <!--    {% include ".icons/material/file-eye-outline.svg" %} -->
+        <!-- </a> -->
+    {% endif %}
+{% endif %}
+
+{{ page.content }}

@@ -1,113 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/bots/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/faqs/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/older-releases/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/changelog/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/classes/message/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/classes/stark/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/databases/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/databases/postgres/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/databases/telegram-as-database/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/databases/tinydb/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/decorators/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/decorators/admins/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/decorators/callback/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/decorators/command/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/decorators/inline/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/helpers/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/helpers/patch/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/helpers/process/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/introduction/install/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/introduction/quickstart/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2022-04-07</lastmod>
+         <loc>https://pystark.codes/start/boilerplate/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pystark.codes/start/examples/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pystark.codes/start/running-bot/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pystark.codes/start/variables/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pystark.codes/topics/bot-menu/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pystark.codes/topics/customization/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pystark.codes/topics/plugins/</loc>
+         <lastmod>2022-04-10</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://pystark.codes/topics/settings/</loc>
+         <lastmod>2022-04-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
