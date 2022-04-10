@@ -79,6 +79,7 @@ nav:
     - helpers/index.md
     - helpers/patch.md
     - helpers/process.md
+    - helpers/stickers.md
   - bots.md
   - FAQ: meta/faqs.md
   - ChangeLog:

@@ -19,7 +19,7 @@ MANIFEST
 *.egg-info
 
 # Local
-tests/
+testing/
 /test.py
 /*.env
 /info.txt

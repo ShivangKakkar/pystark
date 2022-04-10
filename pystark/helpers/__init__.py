@@ -20,3 +20,4 @@
 from .patch import patch
 from .process import exec_sync, exec_async
 from .localization import get_all_langs, l10n_setup, l10n
+from .stickers import to_webp

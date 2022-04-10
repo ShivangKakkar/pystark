@@ -1,6 +1,13 @@
 # ChangeLog
 
-Latest Version: `v1.1.0`
+Latest Version: `v1.1.2`
+
+---
+
+<a name="v1.1.2"></a>
+### v1.1.2 <small>- April 10, 2022</small>
+
+- Added function [to_webp][pystark.helpers.stickers.to_webp] (`pystark.helpers.stickers.to_webp`) to package [helpers](/helpers)
 
 ---
 

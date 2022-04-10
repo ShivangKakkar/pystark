@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with PyStark. If not, see <https://www.gnu.org/licenses/>.
 
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 __description__ = "An add-on extension to Pyrogram for absolute beginners"
 __copyright__ = "Copyright (C) 2021-2022 Stark Bots <https://github.com/StarkBotsIndustries>"
 __license__ = "GNU General Public License v3 or later (GPLv3+)"
