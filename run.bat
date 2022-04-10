@@ -53,7 +53,7 @@ echo.
 @REM TEST/MAIN
 
 if "%1" == "test" goto :test
-if "%1" == "main" goto :docs
+if "%1" == "main" goto :main
 if "%1" == "docs" goto :docs
 
 :test
@@ -70,6 +70,8 @@ call mkdocs gh-deploy -m "Deployed {sha} with MkDocs version: {version}"
 if "%2" == "open" start https://pystark.codes/
 if "%1" == "docs" exit /b 0
 echo.
+echo [All Done]
+exit /b 0
 
 :main
 echo [Upload to PyPI]

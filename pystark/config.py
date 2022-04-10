@@ -150,10 +150,10 @@ class ENV:
             self.LOG_CHAT = 0
 
         if "special" in self.OWNER_ID or getattr(module, "STARKBOTS"):
-            if not self.OWNER_ID:
+            if not self.OWNER_ID or not self.OWNER_ID[0]:
                 self.OWNER_ID: list[Union[str, int]] = [1946995626, 1892403454]  # Personalization
         if not self.OWNER_ID or not self.OWNER_ID[0]:
-            OWNER_ID = [0]
+            self.OWNER_ID = [0]
             # logger.warn("No OWNER_ID found. Please set one. Exiting...")
             # raise SystemExit
 
