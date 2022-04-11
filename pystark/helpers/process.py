@@ -33,7 +33,16 @@ def exec_sync(cmd: str, shell: bool = False) -> (str, str):
     """
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=shell)
     stdout, stderr = proc.communicate()
-    return str(stdout), str(stderr)
+    # None shouldn't be converted to "None" or b''
+    if stdout:
+        stdout = str(stdout.decode("utf-8"))
+    else:
+        stdout = ""
+    if stderr:
+        stderr = str(stderr.decode("utf-8"))
+    else:
+        stderr = ""
+    return stdout, stderr
 
 
 async def exec_async(cmd: str, shell: bool = False) -> (str, str):
@@ -51,4 +60,13 @@ async def exec_async(cmd: str, shell: bool = False) -> (str, str):
     else:
         proc = await asyncio.create_subprocess_shell(cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT, shell=True)
     stdout, stderr = await proc.communicate()
-    return str(stdout), str(stderr)
+    # None shouldn't be converted to "None" or b''
+    if stdout:
+        stdout = str(stdout.decode("utf-8"))
+    else:
+        stdout = ""
+    if stderr:
+        stderr = str(stderr.decode("utf-8"))
+    else:
+        stderr = ""
+    return stdout, stderr

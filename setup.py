@@ -26,7 +26,7 @@ with open("README.md", encoding="utf-8") as f:
 with open("requirements.txt", encoding="utf-8") as r:
     install_requires = [i.strip() for i in r if not i.startswith('#')]
 
-with open("pystark/constants.py", "r") as f:
+with open("pystark/constants.py", "r", encoding="utf-8") as f:
     text = f.read()
     pat = r"['\"]([^'\"]+)['\"]"
     version = re.search("__version__ = "+pat, text).group(1)

@@ -76,12 +76,12 @@ async def l10n(lang: str = None):
 
 
 async def yaml_load(path):
-    with open(path, "r") as fi:
+    with open(path, "r", encoding="utf-8") as fi:
         return yaml.safe_load(fi)
 
 
 async def json_load(path):
-    with open(path, "r") as fi:
+    with open(path, "r", encoding="utf-8") as fi:
         return json.load(fi)
 
 

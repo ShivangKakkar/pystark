@@ -27,7 +27,7 @@ async def json(_, msg: Message):
         return
     data = str(msg.reply_to_message)
     if len(data) > 4096:
-        with open("message.json", "w") as f:
+        with open("message.json", "w", encoding="utf-8") as f:
             f.write(data)
         await msg.reply_document("message.json", quote=True)
         os.remove("message.json")
@@ -41,7 +41,7 @@ async def jsondoc(_, msg: Message):
         await msg.reply("Please reply to a message", quote=True)
         return
     data = str(msg.reply_to_message)
-    with open("message.json", "w") as f:
+    with open("message.json", "w", encoding="utf-8") as f:
         f.write(data)
     await msg.reply_document("message.json", quote=True)
     os.remove("message.json")
