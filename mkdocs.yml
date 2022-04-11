@@ -69,7 +69,7 @@ nav:
     - decorators/command.md
     - decorators/callback.md
     - decorators/inline.md
-    - decorators/admins.md
+#    - decorators/admins.md
   - Databases:
     - databases/index.md
     - Using Postgres: databases/postgres.md

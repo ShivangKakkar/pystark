@@ -34,4 +34,6 @@ site/
 
 # Temp
 pystark/helpers/requests.py
+pystark/decorators/admins.py
 requests.md
+admins.md

@@ -30,7 +30,7 @@ Not convinced to use PyStark? Try it out first, using few small steps given in t
 - [Command Decorator](/decorators/command) - The main decorator in pystark.
 - [Callback Decorator](/decorators/callback) - Handle callback queries.
 - [Inline Decorator](/decorators/inline) - Handle inline queries.
-- [Admins Decorator](/decorators/admins) - Handle inline queries.
+- [Admins Decorator](/admins.md) - Handle inline queries.
 - [Querying Postgres Database](/databases/postgres) - Use postgres with PyStark.
 - [Telegram as a Database](/databases/telegram-as-database) - Use Telegram as a Database with PyStark.
 - [TinyDB](/databases/tinydb) - Use TinyDB as project database with PyStark.
