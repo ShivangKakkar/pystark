@@ -19,7 +19,7 @@ There are some things that are common in most of the telegram bots. This library
 
    Of course that can be turned off using [project settings](https://pystark.codes/start/settings)
 
-2. **Databases** - There are in-built functions that help in using databases. The databases include `postgres`, `redis`, `tinydb` and `telegramdb`
+2. **Databases** - There are in-built functions that help in using databases. The databases include `postgres`, `tinydb` and `telegramdb`
  
     To know more about using databases in pystark - [Click Here](https://pystark.codes/topics/using-databases/)
 

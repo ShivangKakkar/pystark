@@ -46,10 +46,8 @@ It should be filled as `BOT_TOKEN`
 
 ## Other Variables
 
-Necessity of these variables depends on particular use case. For example, you need `DATABASE_URL` only if you use sql database. You need `REDIS_URL` only if you use redis as your database.
+Necessity of these variables depends on particular use case. For example, you need `DATABASE_URL` only if you use sql database.
 
 - `DATABASE_URL` - needed only for PostgreSQL database
-- `REDIS_URL` - needed only for Redis database (public endpoint)
-- `REDIS_PASSWORD` - needed only for Redis database
 - `DB_SESSION` - needed only for using Telegram as a database.
 - `DB_CHAT_ID`- needed only for using Telegram as a database (ID of a new channel).

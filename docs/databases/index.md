@@ -1,6 +1,6 @@
 # Using Databases
 
-You can use any database you wish with PyStark, but we have provided a simple default setup for some databases, such as PostgreSQL and Redis, to make them even easier to use.
+You can use any database you wish with PyStark, but we have provided a simple default setup for some databases, such as PostgreSQL and TelegramDB, to make them even easier to use.
 By following this guide, you will have a basic understanding of how to use them.
 
 ---
@@ -62,32 +62,3 @@ You can use Telegram as a Database, thanks to [this project](https://pypi.org/pr
 TinyDB is a simple database which does not require a Database URL and is very simple. If you are a beginner, it is for you. [Read How to Use It](/databases/tinydb).
 
 ---
-
-## Redis (using redis-py)
-
-- **Variables** - You need to set ``REDIS_URL`` (public endpoint) and ``REDIS_PASSWORD`` by creating a database at [redislabs.com](https://redislabs.com)
-
-<br>
-
-- **Setting and Getting key-value pairs**
-
-```python
-from pystark.database.redis_db import redis
-
-redis.set('Agra', 'Taj Mahal')
-```
-
-
-```python
-redis.get('Agra')
-```
-
-```python
-b'Taj Mahal'
-```
-
----
-
-## MongoDB
-
-Coming soon.

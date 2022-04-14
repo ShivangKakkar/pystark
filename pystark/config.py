@@ -131,8 +131,6 @@ class ENV:
     if DATABASE_URL:
         if 'postgres' in DATABASE_URL and 'postgresql' not in DATABASE_URL:
             DATABASE_URL = DATABASE_URL.replace("postgres", "postgresql")
-    REDIS_URL = os.environ.get("REDIS_URL", "").strip()
-    REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD", "").strip()
 
     def __init__(self):
         module = settings()
