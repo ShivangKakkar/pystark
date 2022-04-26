@@ -17,11 +17,11 @@ There are some things that are common in most of the telegram bots. This library
 
 1. **Addons** - Any project using `pystark` can enable in-built addons that come with pystark. For example, default addons automatically add some commands like */start*, */help*, */about* and */id*.
 
-   Of course that can be turned off using [project settings](https://pystark.codes/start/settings)
+   Of course that can be turned off using [project settings](https://pystark.codes/topics/settings)
 
 2. **Databases** - There are in-built functions that help in using databases. The databases include `postgres`, `tinydb` and `telegramdb`
  
-    To know more about using databases in pystark - [Click Here](https://pystark.codes/topics/using-databases/)
+    To know more about using databases in pystark - [Click Here](https://pystark.codes/databases/)
 
 3. **Boilerplate Code** - You can generate a boilerplate with all the files you will need using our command line utility. Optionally, you can generate it with added Heroku Support (app.json, Procfile, etc.).
 
