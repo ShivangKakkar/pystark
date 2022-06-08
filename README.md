@@ -1,4 +1,8 @@
-# PyStark
+# This project is archived for the time being.
+
+---
+
+## PyStark
 
 > A star ⭐ from you means a lot
 
